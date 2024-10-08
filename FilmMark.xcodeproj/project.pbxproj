@@ -10,9 +10,12 @@
 		483BAF092CB52591007DABFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF082CB52591007DABFA /* AppDelegate.swift */; };
 		483BAF0B2CB52591007DABFA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF0A2CB52591007DABFA /* SceneDelegate.swift */; };
 		483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF0C2CB52591007DABFA /* ViewController.swift */; };
-		483BAF102CB52591007DABFA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 483BAF0F2CB52591007DABFA /* Base */; };
 		483BAF122CB52593007DABFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 483BAF112CB52593007DABFA /* Assets.xcassets */; };
 		483BAF152CB52593007DABFA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 483BAF142CB52593007DABFA /* Base */; };
+		483BAF1D2CB52645007DABFA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 483BAF1C2CB52645007DABFA /* .gitignore */; };
+		483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF1F2CB526CF007DABFA /* BaseViewController.swift */; };
+		483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF212CB5275B007DABFA /* BaseViewModel.swift */; };
+		483BAF242CB52775007DABFA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF232CB52775007DABFA /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +23,13 @@
 		483BAF082CB52591007DABFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		483BAF0A2CB52591007DABFA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		483BAF0C2CB52591007DABFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		483BAF0F2CB52591007DABFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		483BAF112CB52593007DABFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		483BAF142CB52593007DABFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		483BAF162CB52593007DABFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		483BAF1C2CB52645007DABFA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		483BAF1F2CB526CF007DABFA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		483BAF212CB5275B007DABFA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		483BAF232CB52775007DABFA /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,7 @@
 		483BAEFC2CB52591007DABFA = {
 			isa = PBXGroup;
 			children = (
+				483BAF1C2CB52645007DABFA /* .gitignore */,
 				483BAF072CB52591007DABFA /* FilmMark */,
 				483BAF062CB52591007DABFA /* Products */,
 			);
@@ -56,15 +63,25 @@
 		483BAF072CB52591007DABFA /* FilmMark */ = {
 			isa = PBXGroup;
 			children = (
+				483BAF1E2CB526B3007DABFA /* Base */,
 				483BAF082CB52591007DABFA /* AppDelegate.swift */,
 				483BAF0A2CB52591007DABFA /* SceneDelegate.swift */,
 				483BAF0C2CB52591007DABFA /* ViewController.swift */,
-				483BAF0E2CB52591007DABFA /* Main.storyboard */,
 				483BAF112CB52593007DABFA /* Assets.xcassets */,
 				483BAF132CB52593007DABFA /* LaunchScreen.storyboard */,
 				483BAF162CB52593007DABFA /* Info.plist */,
 			);
 			path = FilmMark;
+			sourceTree = "<group>";
+		};
+		483BAF1E2CB526B3007DABFA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				483BAF1F2CB526CF007DABFA /* BaseViewController.swift */,
+				483BAF212CB5275B007DABFA /* BaseViewModel.swift */,
+				483BAF232CB52775007DABFA /* BaseView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +143,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				483BAF122CB52593007DABFA /* Assets.xcassets in Resources */,
+				483BAF1D2CB52645007DABFA /* .gitignore in Resources */,
 				483BAF152CB52593007DABFA /* Base in Resources */,
-				483BAF102CB52591007DABFA /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +156,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
+				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
+				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
+				483BAF242CB52775007DABFA /* BaseView.swift in Sources */,
 				483BAF092CB52591007DABFA /* AppDelegate.swift in Sources */,
 				483BAF0B2CB52591007DABFA /* SceneDelegate.swift in Sources */,
 			);
@@ -147,14 +167,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		483BAF0E2CB52591007DABFA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				483BAF0F2CB52591007DABFA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		483BAF132CB52593007DABFA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -297,9 +309,9 @@
 				INFOPLIST_FILE = FilmMark/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +319,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.FilmMark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -325,9 +341,9 @@
 				INFOPLIST_FILE = FilmMark/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +351,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dahyun.FilmMark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
