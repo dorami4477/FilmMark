@@ -23,6 +23,8 @@
 		E0C45D342CB52CD100E94B31 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D332CB52CD100E94B31 /* Colors.swift */; };
 		E0C45D362CB52D1000E94B31 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D352CB52D1000E94B31 /* Icons.swift */; };
 		E0C45D382CB52D8100E94B31 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D372CB52D8100E94B31 /* Fonts.swift */; };
+		E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D892CB62FCB00E94B31 /* TargetType.swift */; };
+		E0C45D8C2CB62FF100E94B31 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D8B2CB62FF100E94B31 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		E0C45D332CB52CD100E94B31 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E0C45D352CB52D1000E94B31 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		E0C45D372CB52D8100E94B31 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		E0C45D892CB62FCB00E94B31 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		E0C45D8B2CB62FF100E94B31 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		483BAF072CB52591007DABFA /* FilmMark */ = {
 			isa = PBXGroup;
 			children = (
+				E0C45D862CB62FAB00E94B31 /* Network */,
 				E0C45D322CB52CBF00E94B31 /* DesignSystem */,
 				483BAF1E2CB526B3007DABFA /* Base */,
 				483BAF082CB52591007DABFA /* AppDelegate.swift */,
@@ -107,6 +112,15 @@
 				E0C45D372CB52D8100E94B31 /* Fonts.swift */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		E0C45D862CB62FAB00E94B31 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E0C45D892CB62FCB00E94B31 /* TargetType.swift */,
+				E0C45D8B2CB62FF100E94B31 /* APIKey.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,11 +200,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */,
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
 				E0C45D362CB52D1000E94B31 /* Icons.swift in Sources */,
 				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
 				E0C45D342CB52CD100E94B31 /* Colors.swift in Sources */,
+				E0C45D8C2CB62FF100E94B31 /* APIKey.swift in Sources */,
 				483BAF242CB52775007DABFA /* BaseView.swift in Sources */,
 				483BAF092CB52591007DABFA /* AppDelegate.swift in Sources */,
 				E0C45D382CB52D8100E94B31 /* Fonts.swift in Sources */,
