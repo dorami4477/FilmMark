@@ -25,6 +25,7 @@
 		E0C45D382CB52D8100E94B31 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D372CB52D8100E94B31 /* Fonts.swift */; };
 		E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D892CB62FCB00E94B31 /* TargetType.swift */; };
 		E0C45D8C2CB62FF100E94B31 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D8B2CB62FF100E94B31 /* APIKey.swift */; };
+		E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C45D932CB63CD200E94B31 /* TMDBRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		E0C45D372CB52D8100E94B31 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		E0C45D892CB62FCB00E94B31 /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
 		E0C45D8B2CB62FF100E94B31 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		E0C45D932CB63CD200E94B31 /* TMDBRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				E0C45D892CB62FCB00E94B31 /* TargetType.swift */,
 				E0C45D8B2CB62FF100E94B31 /* APIKey.swift */,
+				E0C45D932CB63CD200E94B31 /* TMDBRouter.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */,
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
+				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
 				E0C45D362CB52D1000E94B31 /* Icons.swift in Sources */,
 				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
 				E0C45D342CB52CD100E94B31 /* Colors.swift in Sources */,
