@@ -17,6 +17,9 @@
 		483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF212CB5275B007DABFA /* BaseViewModel.swift */; };
 		483BAF242CB52775007DABFA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF232CB52775007DABFA /* BaseView.swift */; };
 		E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */; };
+		E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */; };
+		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
+		E0AAC9EA2CB7DC01004A3552 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E92CB7DC01004A3552 /* RxSwift */; };
 		E0C45D282CB52BAC00E94B31 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D272CB52BAC00E94B31 /* RealmSwift */; };
 		E0C45D2B2CB52BBC00E94B31 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2A2CB52BBC00E94B31 /* SnapKit */; };
 		E0C45D2E2CB52BD500E94B31 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2D2CB52BD500E94B31 /* Kingfisher */; };
@@ -41,6 +44,7 @@
 		483BAF212CB5275B007DABFA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		483BAF232CB52775007DABFA /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E0C45D332CB52CD100E94B31 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E0C45D352CB52D1000E94B31 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		E0C45D372CB52D8100E94B31 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -53,8 +57,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0AAC9EA2CB7DC01004A3552 /* RxSwift in Frameworks */,
 				E0C45D2E2CB52BD500E94B31 /* Kingfisher in Frameworks */,
 				E0C45D312CB52BEF00E94B31 /* Alamofire in Frameworks */,
+				E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */,
 				E0C45D282CB52BAC00E94B31 /* RealmSwift in Frameworks */,
 				E0C45D2B2CB52BBC00E94B31 /* SnapKit in Frameworks */,
 			);
@@ -122,6 +128,7 @@
 			children = (
 				E0C45D892CB62FCB00E94B31 /* TargetType.swift */,
 				E0C45D932CB63CD200E94B31 /* TMDBRouter.swift */,
+				E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -175,6 +182,7 @@
 				E0C45D292CB52BBC00E94B31 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E0C45D2C2CB52BD500E94B31 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E0C45D2F2CB52BEF00E94B31 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 483BAF062CB52591007DABFA /* Products */;
 			projectDirPath = "";
@@ -214,6 +222,7 @@
 				483BAF092CB52591007DABFA /* AppDelegate.swift in Sources */,
 				E0C45D382CB52D8100E94B31 /* Fonts.swift in Sources */,
 				E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */,
+				E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */,
 				483BAF0B2CB52591007DABFA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +448,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.8.0;
+			};
+		};
 		E0C45D262CB52BAC00E94B31 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -474,6 +491,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E0AAC9E72CB7DC01004A3552 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		E0AAC9E92CB7DC01004A3552 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
 		E0C45D272CB52BAC00E94B31 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E0C45D262CB52BAC00E94B31 /* XCRemoteSwiftPackageReference "realm-swift" */;
