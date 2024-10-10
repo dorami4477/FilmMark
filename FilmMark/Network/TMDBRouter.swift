@@ -9,7 +9,8 @@ import Foundation
 import Alamofire
 
 enum TMDBRouter {
-    
+    case searchMovie(keyword: String, page: Int)
+    case searchTV(keyword: String, page: Int)
 }
 
 extension TMDBRouter: TargetType {
@@ -19,7 +20,10 @@ extension TMDBRouter: TargetType {
     
     var endPoint: String {
         switch self {
-        
+        case .searchMovie:
+            return "search/movie"
+        case .searchTV:
+            return "search/tv"
         }
     }
     
@@ -36,6 +40,18 @@ extension TMDBRouter: TargetType {
     
     var queryItems: [URLQueryItem] {
         switch self {
+        case .searchMovie(let keyword, let page):
+            return [
+                URLQueryItem(name: "query", value: keyword),
+                URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: "language", value: "ko-KR")
+            ]
+        case .searchTV(let keyword, let page):
+            return [
+                URLQueryItem(name: "query", value: keyword),
+                URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: "language", value: "ko-KR")
+            ]
         }
     }
 }
