@@ -20,6 +20,7 @@
 		E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */; };
 		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
 		E0AAC9EA2CB7DC01004A3552 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E92CB7DC01004A3552 /* RxSwift */; };
+		E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */; };
 		E0C45D282CB52BAC00E94B31 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D272CB52BAC00E94B31 /* RealmSwift */; };
 		E0C45D2B2CB52BBC00E94B31 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2A2CB52BBC00E94B31 /* SnapKit */; };
 		E0C45D2E2CB52BD500E94B31 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2D2CB52BD500E94B31 /* Kingfisher */; };
@@ -45,6 +46,7 @@
 		483BAF232CB52775007DABFA /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsBox.swift; sourceTree = "<group>"; };
 		E0C45D332CB52CD100E94B31 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E0C45D352CB52D1000E94B31 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		E0C45D372CB52D8100E94B31 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		E0AAC9F42CB81C42004A3552 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E0C45D322CB52CBF00E94B31 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +136,7 @@
 		E0C45D862CB62FAB00E94B31 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E0AAC9F42CB81C42004A3552 /* Model */,
 				E0C45D892CB62FCB00E94B31 /* TargetType.swift */,
 				E0C45D932CB63CD200E94B31 /* TMDBRouter.swift */,
 				E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */,
@@ -214,6 +225,7 @@
 				E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */,
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
+				E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */,
 				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
 				E0C45D362CB52D1000E94B31 /* Icons.swift in Sources */,
 				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
