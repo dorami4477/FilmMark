@@ -16,6 +16,10 @@
 		483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF1F2CB526CF007DABFA /* BaseViewController.swift */; };
 		483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF212CB5275B007DABFA /* BaseViewModel.swift */; };
 		483BAF242CB52775007DABFA /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483BAF232CB52775007DABFA /* BaseView.swift */; };
+		487C4A902CB82FB5004AA413 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4A8F2CB82FB5004AA413 /* TabBarController.swift */; };
+		487C4A922CB8300F004AA413 /* MyFilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4A912CB8300F004AA413 /* MyFilmViewController.swift */; };
+		487C4A942CB8302D004AA413 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4A932CB8302D004AA413 /* HomeViewController.swift */; };
+		487C4A962CB83038004AA413 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4A952CB83038004AA413 /* SearchViewController.swift */; };
 		E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */; };
 		E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */; };
 		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
@@ -44,6 +48,10 @@
 		483BAF1F2CB526CF007DABFA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		483BAF212CB5275B007DABFA /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		483BAF232CB52775007DABFA /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		487C4A8F2CB82FB5004AA413 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		487C4A912CB8300F004AA413 /* MyFilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilmViewController.swift; sourceTree = "<group>"; };
+		487C4A932CB8302D004AA413 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		487C4A952CB83038004AA413 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsBox.swift; sourceTree = "<group>"; };
@@ -101,6 +109,9 @@
 				483BAF112CB52593007DABFA /* Assets.xcassets */,
 				483BAF132CB52593007DABFA /* LaunchScreen.storyboard */,
 				483BAF162CB52593007DABFA /* Info.plist */,
+				487C4A912CB8300F004AA413 /* MyFilmViewController.swift */,
+				487C4A932CB8302D004AA413 /* HomeViewController.swift */,
+				487C4A952CB83038004AA413 /* SearchViewController.swift */,
 			);
 			path = FilmMark;
 			sourceTree = "<group>";
@@ -111,6 +122,7 @@
 				483BAF1F2CB526CF007DABFA /* BaseViewController.swift */,
 				483BAF212CB5275B007DABFA /* BaseViewModel.swift */,
 				483BAF232CB52775007DABFA /* BaseView.swift */,
+				487C4A8F2CB82FB5004AA413 /* TabBarController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -224,13 +236,17 @@
 			files = (
 				E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */,
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
+				487C4A922CB8300F004AA413 /* MyFilmViewController.swift in Sources */,
+				487C4A942CB8302D004AA413 /* HomeViewController.swift in Sources */,
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
+				487C4A902CB82FB5004AA413 /* TabBarController.swift in Sources */,
 				E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */,
 				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
 				E0C45D362CB52D1000E94B31 /* Icons.swift in Sources */,
 				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
 				E0C45D342CB52CD100E94B31 /* Colors.swift in Sources */,
 				483BAF242CB52775007DABFA /* BaseView.swift in Sources */,
+				487C4A962CB83038004AA413 /* SearchViewController.swift in Sources */,
 				483BAF092CB52591007DABFA /* AppDelegate.swift in Sources */,
 				E0C45D382CB52D8100E94B31 /* Fonts.swift in Sources */,
 				E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */,
