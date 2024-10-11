@@ -25,6 +25,8 @@
 		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
 		E0AAC9EA2CB7DC01004A3552 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E92CB7DC01004A3552 /* RxSwift */; };
 		E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */; };
+		E0AACA402CB8C163004A3552 /* MyFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA3F2CB8C163004A3552 /* MyFilm.swift */; };
+		E0AACA422CB8C1F4004A3552 /* MyFilmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA412CB8C1F4004A3552 /* MyFilmRepository.swift */; };
 		E0C45D282CB52BAC00E94B31 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D272CB52BAC00E94B31 /* RealmSwift */; };
 		E0C45D2B2CB52BBC00E94B31 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2A2CB52BBC00E94B31 /* SnapKit */; };
 		E0C45D2E2CB52BD500E94B31 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2D2CB52BD500E94B31 /* Kingfisher */; };
@@ -55,6 +57,8 @@
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsBox.swift; sourceTree = "<group>"; };
+		E0AACA3F2CB8C163004A3552 /* MyFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilm.swift; sourceTree = "<group>"; };
+		E0AACA412CB8C1F4004A3552 /* MyFilmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilmRepository.swift; sourceTree = "<group>"; };
 		E0C45D332CB52CD100E94B31 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E0C45D352CB52D1000E94B31 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		E0C45D372CB52D8100E94B31 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 		483BAF072CB52591007DABFA /* FilmMark */ = {
 			isa = PBXGroup;
 			children = (
+				E0AACA3E2CB8C15A004A3552 /* Database */,
 				E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */,
 				E0C45D862CB62FAB00E94B31 /* Network */,
 				E0C45D322CB52CBF00E94B31 /* DesignSystem */,
@@ -133,6 +138,15 @@
 				E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E0AACA3E2CB8C15A004A3552 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				E0AACA3F2CB8C163004A3552 /* MyFilm.swift */,
+				E0AACA412CB8C1F4004A3552 /* MyFilmRepository.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		E0C45D322CB52CBF00E94B31 /* DesignSystem */ = {
@@ -244,6 +258,8 @@
 				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
 				E0C45D362CB52D1000E94B31 /* Icons.swift in Sources */,
 				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
+				E0AACA402CB8C163004A3552 /* MyFilm.swift in Sources */,
+				E0AACA422CB8C1F4004A3552 /* MyFilmRepository.swift in Sources */,
 				E0C45D342CB52CD100E94B31 /* Colors.swift in Sources */,
 				483BAF242CB52775007DABFA /* BaseView.swift in Sources */,
 				487C4A962CB83038004AA413 /* SearchViewController.swift in Sources */,
