@@ -15,7 +15,7 @@ final class TabBarController: UITabBarController {
         
         tabBar.tintColor = Colors.primaryColor
         
-        let home = UINavigationController(rootViewController: HomeViewController())
+        let home = UINavigationController(rootViewController: HomeViewController(viewModel: HomeViewModel()))
         home.tabBarItem = UITabBarItem(title: "Home", image: Icons.home, tag: 0)
         
         let search = UINavigationController(rootViewController: SearchViewController())

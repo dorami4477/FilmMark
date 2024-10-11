@@ -11,6 +11,8 @@ import Alamofire
 enum TMDBRouter {
     case searchMovie(keyword: String, page: Int)
     case searchTV(keyword: String, page: Int)
+    case trendingMovie
+    case trendingTV
 }
 
 extension TMDBRouter: TargetType {
@@ -24,6 +26,10 @@ extension TMDBRouter: TargetType {
             return "search/movie"
         case .searchTV:
             return "search/tv"
+        case .trendingMovie:
+            return "trending/movie/day"
+        case .trendingTV:
+            return "trending/tv/day"
         }
     }
     
@@ -50,6 +56,14 @@ extension TMDBRouter: TargetType {
             return [
                 URLQueryItem(name: "query", value: keyword),
                 URLQueryItem(name: "page", value: "\(page)"),
+                URLQueryItem(name: "language", value: "ko-KR")
+            ]
+        case .trendingMovie:
+            return [
+                URLQueryItem(name: "language", value: "ko-KR")
+            ]
+        case .trendingTV:
+            return [
                 URLQueryItem(name: "language", value: "ko-KR")
             ]
         }
