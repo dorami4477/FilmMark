@@ -24,6 +24,7 @@
 		487C4AC12CB8E77F004AA413 /* RoundRectangleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4AC02CB8E77F004AA413 /* RoundRectangleButton.swift */; };
 		487C4AC32CB8F404004AA413 /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4AC22CB8F404004AA413 /* GradientImageView.swift */; };
 		487C4AC52CB8F59B004AA413 /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4AC42CB8F59B004AA413 /* ContentsCollectionViewCell.swift */; };
+		487C4AC72CB914CB004AA413 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4AC62CB914CB004AA413 /* HomeViewModel.swift */; };
 		E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */; };
 		E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */; };
 		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
@@ -62,6 +63,7 @@
 		487C4AC02CB8E77F004AA413 /* RoundRectangleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectangleButton.swift; sourceTree = "<group>"; };
 		487C4AC22CB8F404004AA413 /* GradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
 		487C4AC42CB8F59B004AA413 /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCollectionViewCell.swift; sourceTree = "<group>"; };
+		487C4AC62CB914CB004AA413 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsBox.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				487C4A932CB8302D004AA413 /* HomeViewController.swift */,
 				487C4ABD2CB8E381004AA413 /* HomeView.swift */,
+				487C4AC62CB914CB004AA413 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */,
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
 				487C4A922CB8300F004AA413 /* MyFilmViewController.swift in Sources */,
+				487C4AC72CB914CB004AA413 /* HomeViewModel.swift in Sources */,
 				487C4A942CB8302D004AA413 /* HomeViewController.swift in Sources */,
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
 				487C4A902CB82FB5004AA413 /* TabBarController.swift in Sources */,
