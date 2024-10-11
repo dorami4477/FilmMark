@@ -35,6 +35,11 @@
 		E0AACA422CB8C1F4004A3552 /* MyFilmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA412CB8C1F4004A3552 /* MyFilmRepository.swift */; };
 		E0AACA6C2CB92B57004A3552 /* LikeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA6B2CB92B57004A3552 /* LikeAlertViewController.swift */; };
 		E0AACA6E2CB9377A004A3552 /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA6D2CB9377A004A3552 /* DocumentManager.swift */; };
+		E0AACA782CB94217004A3552 /* SearchCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA772CB94217004A3552 /* SearchCollectionHeaderView.swift */; };
+		E0AACA7A2CB946CD004A3552 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA792CB946CD004A3552 /* SearchView.swift */; };
+		E0AACA7C2CB94DEC004A3552 /* SearchTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA7B2CB94DEC004A3552 /* SearchTableHeaderView.swift */; };
+		E0AACA802CB953AA004A3552 /* HeaderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA7F2CB953AA004A3552 /* HeaderTitleView.swift */; };
+		E0AACA842CB96263004A3552 /* CollectionViewLayout + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AACA832CB96263004A3552 /* CollectionViewLayout + Extension.swift */; };
 		E0C45D282CB52BAC00E94B31 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D272CB52BAC00E94B31 /* RealmSwift */; };
 		E0C45D2B2CB52BBC00E94B31 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2A2CB52BBC00E94B31 /* SnapKit */; };
 		E0C45D2E2CB52BD500E94B31 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E0C45D2D2CB52BD500E94B31 /* Kingfisher */; };
@@ -75,6 +80,11 @@
 		E0AACA412CB8C1F4004A3552 /* MyFilmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFilmRepository.swift; sourceTree = "<group>"; };
 		E0AACA6B2CB92B57004A3552 /* LikeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeAlertViewController.swift; sourceTree = "<group>"; };
 		E0AACA6D2CB9377A004A3552 /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
+		E0AACA772CB94217004A3552 /* SearchCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionHeaderView.swift; sourceTree = "<group>"; };
+		E0AACA792CB946CD004A3552 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		E0AACA7B2CB94DEC004A3552 /* SearchTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableHeaderView.swift; sourceTree = "<group>"; };
+		E0AACA7F2CB953AA004A3552 /* HeaderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTitleView.swift; sourceTree = "<group>"; };
+		E0AACA832CB96263004A3552 /* CollectionViewLayout + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionViewLayout + Extension.swift"; sourceTree = "<group>"; };
 		E0C45D332CB52CD100E94B31 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E0C45D352CB52D1000E94B31 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		E0C45D372CB52D8100E94B31 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -119,12 +129,14 @@
 		483BAF072CB52591007DABFA /* FilmMark */ = {
 			isa = PBXGroup;
 			children = (
+				E0AACA822CB96255004A3552 /* Extension */,
 				487C4ABF2CB8E73A004AA413 /* CustomView */,
 				E0AACA3E2CB8C15A004A3552 /* Database */,
 				E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */,
 				E0C45D862CB62FAB00E94B31 /* Network */,
 				E0C45D322CB52CBF00E94B31 /* DesignSystem */,
 				487C4ABC2CB8E288004AA413 /* Home */,
+				E0AACA742CB93CFA004A3552 /* Search */,
 				483BAF1E2CB526B3007DABFA /* Base */,
 				483BAF082CB52591007DABFA /* AppDelegate.swift */,
 				483BAF0A2CB52591007DABFA /* SceneDelegate.swift */,
@@ -133,7 +145,6 @@
 				483BAF132CB52593007DABFA /* LaunchScreen.storyboard */,
 				483BAF162CB52593007DABFA /* Info.plist */,
 				487C4A912CB8300F004AA413 /* MyFilmViewController.swift */,
-				487C4A952CB83038004AA413 /* SearchViewController.swift */,
 			);
 			path = FilmMark;
 			sourceTree = "<group>";
@@ -166,6 +177,7 @@
 				487C4AC22CB8F404004AA413 /* GradientImageView.swift */,
 				487C4AC42CB8F59B004AA413 /* ContentsCollectionViewCell.swift */,
 				E0AACA6B2CB92B57004A3552 /* LikeAlertViewController.swift */,
+				E0AACA7F2CB953AA004A3552 /* HeaderTitleView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -187,6 +199,25 @@
 				E0AACA6D2CB9377A004A3552 /* DocumentManager.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		E0AACA742CB93CFA004A3552 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				487C4A952CB83038004AA413 /* SearchViewController.swift */,
+				E0AACA772CB94217004A3552 /* SearchCollectionHeaderView.swift */,
+				E0AACA792CB946CD004A3552 /* SearchView.swift */,
+				E0AACA7B2CB94DEC004A3552 /* SearchTableHeaderView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		E0AACA822CB96255004A3552 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E0AACA832CB96263004A3552 /* CollectionViewLayout + Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		E0C45D322CB52CBF00E94B31 /* DesignSystem */ = {
@@ -291,10 +322,12 @@
 				E0C45D8A2CB62FCB00E94B31 /* TargetType.swift in Sources */,
 				E0AACA6E2CB9377A004A3552 /* DocumentManager.swift in Sources */,
 				483BAF0D2CB52591007DABFA /* ViewController.swift in Sources */,
+				E0AACA7A2CB946CD004A3552 /* SearchView.swift in Sources */,
 				487C4A922CB8300F004AA413 /* MyFilmViewController.swift in Sources */,
 				487C4AC72CB914CB004AA413 /* HomeViewModel.swift in Sources */,
 				487C4A942CB8302D004AA413 /* HomeViewController.swift in Sources */,
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
+				E0AACA782CB94217004A3552 /* SearchCollectionHeaderView.swift in Sources */,
 				487C4A902CB82FB5004AA413 /* TabBarController.swift in Sources */,
 				E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */,
 				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
@@ -303,12 +336,15 @@
 				483BAF202CB526CF007DABFA /* BaseViewController.swift in Sources */,
 				E0AACA402CB8C163004A3552 /* MyFilm.swift in Sources */,
 				E0AACA422CB8C1F4004A3552 /* MyFilmRepository.swift in Sources */,
+				E0AACA802CB953AA004A3552 /* HeaderTitleView.swift in Sources */,
 				487C4AD02CB94003004AA413 /* GenreList.swift in Sources */,
 				E0C45D342CB52CD100E94B31 /* Colors.swift in Sources */,
 				487C4AC32CB8F404004AA413 /* GradientImageView.swift in Sources */,
 				483BAF242CB52775007DABFA /* BaseView.swift in Sources */,
+				E0AACA842CB96263004A3552 /* CollectionViewLayout + Extension.swift in Sources */,
 				487C4AC52CB8F59B004AA413 /* ContentsCollectionViewCell.swift in Sources */,
 				487C4A962CB83038004AA413 /* SearchViewController.swift in Sources */,
+				E0AACA7C2CB94DEC004A3552 /* SearchTableHeaderView.swift in Sources */,
 				487C4ABE2CB8E381004AA413 /* HomeView.swift in Sources */,
 				483BAF092CB52591007DABFA /* AppDelegate.swift in Sources */,
 				E0C45D382CB52D8100E94B31 /* Fonts.swift in Sources */,
