@@ -22,6 +22,7 @@ final class SearchViewModel: BaseViewModel {
         let scrollToTop: PublishRelay<Void> // 상단으로 이동할 타이밍인지
         let isEmptyResults: BehaviorRelay<Bool> // 빈 검색결과인지
         let searchedResults: BehaviorRelay<[SectionOfData<Content>]> // 검색결과
+        let trendingResults: BehaviorRelay<[SectionOfData<Content>]>
     }
     
     func transform(input: Input) -> Output {
@@ -29,6 +30,7 @@ final class SearchViewModel: BaseViewModel {
         let scrollToTop = PublishRelay<Void>()
         let isEmptyResults = BehaviorRelay(value: true)
         let searchedResults: BehaviorRelay<[SectionOfData<Content>]> = BehaviorRelay(value: [])
+        let trendingResults: BehaviorRelay<[SectionOfData<Content>]> = BehaviorRelay(value: [])
         // just data
         var totalPage = 0
         var page = 1
@@ -44,15 +46,15 @@ final class SearchViewModel: BaseViewModel {
             }
             .disposed(by: disposeBag)
         
-        // MARK: 검색어가 없다면 트렌딩 Movie 넣어주기
+        // MARK: 검색어가 없다면 트렌딩 Movie
         isEmptyKeyword
             .filter { $0 }
             .flatMap { _ in NetworkService.shared.fetchResults(model: ContentsBox.self, requestCase: .trendingMovie) }
             .subscribe(with: self, onNext: { owner, result in
                 switch result {
                 case .success(let value):
-                    print(value.results)
-                    //owner.trendingContents.accept(value.results)
+                    let results = SectionOfData(header: "트렌딩", items: value.results)
+                    trendingResults.accept([results])
                 case .failure(let error):
                     print(error)
                 }
@@ -107,6 +109,7 @@ final class SearchViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         return Output(isEmptyKeyword: isEmptyKeyword, scrollToTop: scrollToTop,
-                      isEmptyResults: isEmptyResults, searchedResults: searchedResults)
+                      isEmptyResults: isEmptyResults, searchedResults: searchedResults,
+                      trendingResults: trendingResults)
     }
 }

@@ -13,6 +13,7 @@ import RxDataSources
 
 class SearchViewController: BaseViewController {
     private var searchResultsDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
+    private var trendingDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
     private let main = SearchView()
     private var vm: SearchViewModel!
     private var disposeBag = DisposeBag()
@@ -28,6 +29,7 @@ class SearchViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTrendingDataSource()
         configureSearchResultsDataSource()
         bind()
     }
@@ -51,35 +53,54 @@ class SearchViewController: BaseViewController {
         })
     }
     
+    // MARK: 트렌딩 DataSource
+    private func configureTrendingDataSource() {
+        trendingDataSource = RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>(configureCell: { dataSource, collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCollectionViewCell.identifier, for: indexPath) as? TrendingCollectionViewCell else { return UICollectionViewCell() }
+            cell.configureCell(item)
+            return cell
+        }, configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchCollectionHeaderView.identifier, for: indexPath) as? SearchCollectionHeaderView else { return UICollectionReusableView() }
+            header.configureHeader(titleCase: .trending)
+            return header
+        })
+    }
+   
+    
     // MARK: bind
     private func bind() {
         let searchKeyword = main.searchController.searchBar.rx.text
-        let prefetchedIdxs = main.collectionView.rx.prefetchItems
+        let prefetchedIdxs = main.searchCollectionView.rx.prefetchItems
         
         let input = SearchViewModel.Input(searchKeyword: searchKeyword, prefetchedIdxs: prefetchedIdxs)
         let output = vm.transform(input: input)
         
-        // 키워드가 비어있는지에 따라 tableView 보여주는 여부
+        // 키워드가 비어있는지에 따라 trendingCollectionView 보이거나 안 보이게
         output.isEmptyKeyword
             .map { !$0 }
-            .bind(to: main.tableView.rx.isHidden)
+            .bind(to: main.trendingCollectionView.rx.isHidden)
             .disposed(by: disposeBag)
         
         // 검색결과의 존재여부에 따라 다르게 처리
         output.isEmptyResults
             .bind(with: self) { owner, value in
                 if value {
-                    owner.main.collectionView.setEmptyMessage("검색 결과가 없습니다 :(")
+                    owner.main.searchCollectionView.setEmptyMessage("검색 결과가 없습니다 :(")
                 } else {
-                    owner.main.collectionView.restore()
-                    owner.scrollToTop(owner.main.collectionView)
+                    owner.main.searchCollectionView.restore()
+                    owner.scrollToTop(owner.main.searchCollectionView)
                 }
             }
             .disposed(by: disposeBag)
         
         // 검색결과 dataSource에 반영
         output.searchedResults
-            .bind(to: main.collectionView.rx.items(dataSource: searchResultsDataSource))
+            .bind(to: main.searchCollectionView.rx.items(dataSource: searchResultsDataSource))
+            .disposed(by: disposeBag)
+        
+        // 트렌딩 결과 dataSource에 반영 
+        output.trendingResults
+            .bind(to: main.trendingCollectionView.rx.items(dataSource: trendingDataSource))
             .disposed(by: disposeBag)
     }
     
