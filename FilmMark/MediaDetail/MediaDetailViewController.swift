@@ -37,7 +37,7 @@ class MediaDetailViewController: BaseViewController {
             mainView.posterImageView.kf.setImage(with: url)
         }
         
-        mainView.titleLabel.text = data.title
+        mainView.titleLabel.text = data.displayTitle
         mainView.ratingLabel.text = data.formattedVoteAverage
         mainView.descriptionLabel.text = data.overview
     }
