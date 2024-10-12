@@ -14,6 +14,7 @@ final class SearchViewModel: BaseViewModel {
 
     struct Input {
         let searchKeyword: ControlProperty<String?> // 검색 키워드
+        let prefetchedIdxs: ControlEvent<[IndexPath]> // 스크롤 된 인덱스
     }
     
     struct Output {
@@ -29,6 +30,7 @@ final class SearchViewModel: BaseViewModel {
         let isEmptyResults = BehaviorRelay(value: true)
         let searchedResults: BehaviorRelay<[SectionOfData<Content>]> = BehaviorRelay(value: [])
         // just data
+        var totalPage = 0
         var page = 1
         let keyword = BehaviorRelay(value: "")
         
@@ -57,30 +59,50 @@ final class SearchViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
         
-        // MARK: 검색
+        // MARK: 검색 (30개씩 가져오기)
         keyword
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(isEmptyKeyword)
             .filter { !$0 }
-            .flatMap { _ in NetworkService.shared.fetchResults(model: ContentsBox.self, requestCase: .searchMovie(keyword: keyword.value, page: page)) }
+            .withLatestFrom(keyword)
+            .flatMap { keyword in
+                Single.zip(
+                    NetworkService.shared.fetchResults(model: ContentsBox.self, requestCase: .searchMovie(keyword: keyword, page: page)),
+                    NetworkService.shared.fetchResults(model: ContentsBox.self, requestCase: .searchMovie(keyword: keyword, page: page + 1))
+                )}
             .subscribe(with: self, onNext: { owner, result in
                 switch result {
-                case .success(let value):
-                    let data = value.results
+                case (.success(let beforeData), .success(let afterData)):
+                    let totalData = beforeData.results + afterData.results // 최대 40개의 데이터
+                    let results = Array(totalData.prefix(30)) // 30개만 잘라서 가져오기
+                    totalPage = beforeData.totalPages ?? 0 // 총 페이지수
                     // 검색어 변경돼서 새로운 검색 시
                     if page == 1 {
-                        let section = SectionOfData(header: "검색", items: data)
+                        let section = SectionOfData(header: "검색", items: results)
                         searchedResults.accept([section])
-                        isEmptyResults.accept(data.isEmpty)
+                        isEmptyResults.accept(results.isEmpty)
                     } else { // 페이지네이션 중일 때
                         let before = searchedResults.value.map { $0.items }.first ?? []
-                        let after = before + data
+                        let after = before + results
                         let results = SectionOfData(header: "검색", items: after)
                         searchedResults.accept([results])
                     }
-                case .failure(let error):
-                    print(error)
+                case (.failure(let beforeError), _):
+                    print(beforeError)
+                case (_, .failure(let afterError)):
+                    print(afterError)
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: 페이지네이션
+        input.prefetchedIdxs
+            .compactMap { $0.last }
+            .map { ($0.row, searchedResults.value.map { $0.items }.first?.count ?? 0) } // (스크롤 인덱스, 검색결과 개수)
+            .filter { $0.0 >= $0.1 - 5 && page < totalPage }
+            .subscribe(with: self, onNext: { owner, row in
+                page += 1
+                keyword.accept(keyword.value)
             })
             .disposed(by: disposeBag)
         

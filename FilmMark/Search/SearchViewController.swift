@@ -53,8 +53,9 @@ class SearchViewController: BaseViewController {
     // MARK: bind
     private func bind() {
         let searchKeyword = main.searchController.searchBar.rx.text
+        let prefetchedIdxs = main.collectionView.rx.prefetchItems
         
-        let input = SearchViewModel.Input(searchKeyword: searchKeyword)
+        let input = SearchViewModel.Input(searchKeyword: searchKeyword, prefetchedIdxs: prefetchedIdxs)
         let output = vm.transform(input: input)
         
         // 키워드가 비어있는지에 따라 tableView 보여주는 여부
