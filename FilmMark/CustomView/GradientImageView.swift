@@ -27,6 +27,7 @@ final class GradientImageView: UIView {
     
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         addSubview(imageView)
         
         imageView.snp.makeConstraints { make in

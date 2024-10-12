@@ -41,13 +41,25 @@ final class HomeViewController: BaseViewController {
         configureDataSource()
         bind()
     }
-    
+
     private func bind() {
+        let tapGesture = UITapGestureRecognizer()
+        mainView.gradientImageView.imageView.addGestureRecognizer(tapGesture)
+        
         let input = HomeViewModel.Input(viewDidLoad: Observable.just(()),
                                         movieClicked: mainView.moviesCollectionView.rx.modelSelected(Content.self),
                                         tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self), 
                                         addButtonClicked: mainView.addButton.rx.tap)
         let output = viewModel.transform(input: input)
+        
+        tapGesture.rx.event
+            .withLatestFrom(output.mainMedia)
+            .bind(with: self) { owner, value in
+                let detailVC = MediaDetailViewController()
+                detailVC.data = value
+                owner.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            .disposed(by: disposeBag)
         
         output.genreList
             .bind(with: self) { owner, value in
