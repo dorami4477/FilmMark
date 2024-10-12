@@ -81,7 +81,7 @@ extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          tableView.deselectRow(at: indexPath, animated: true)
          
-         guard let film = films?[indexPath.row] else { return }
+        guard (films?[indexPath.row]) != nil else { return }
          
          let detailVC = MediaDetailViewController()
          navigationController?.pushViewController(detailVC, animated: true)
