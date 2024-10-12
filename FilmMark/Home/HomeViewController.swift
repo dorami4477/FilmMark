@@ -97,7 +97,7 @@ final class HomeViewController: BaseViewController {
                 let newMedia = MyFilm(id: value.id, title: value.title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
                 
                 guard let backURL = value.fullBackdropPath, let posterURL = value.fullPosterPath else { return }
-                self?.stringToUIImage([posterURL, backURL], completion: { value in
+                self?.stringToUIImage([backURL, posterURL], completion: { value in
                     guard let back = value[0], let poster = value[1] else { return }
                     self?.presentLikeAlert(newMedia, backdropImage: back, posterImage: poster)
                 })
