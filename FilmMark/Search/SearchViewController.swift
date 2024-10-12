@@ -46,6 +46,7 @@ class SearchViewController: BaseViewController {
             return cell
         }, configureSupplementaryView: { dataSource, collectionView, kind, indexPath in
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchCollectionHeaderView.identifier, for: indexPath) as? SearchCollectionHeaderView else { return UICollectionReusableView() }
+            header.configureHeader(titleCase: .search)
             return header
         })
     }
