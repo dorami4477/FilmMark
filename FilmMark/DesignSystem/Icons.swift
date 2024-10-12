@@ -16,4 +16,5 @@ enum Icons {
     static let down = UIImage(systemName: "square.and.arrow.down")
     static let smile = UIImage(systemName: "face.smiling")
     static let plus = UIImage(systemName: "plus")
+    static let delete = UIImage(systemName: "trash")
 }
