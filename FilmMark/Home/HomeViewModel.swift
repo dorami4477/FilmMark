@@ -16,17 +16,17 @@ final class HomeViewModel: BaseViewModel {
     
     struct Input {
         let viewDidLoad: Observable<Void>
-        let movieClicked: ControlEvent<Content>
-        let tvClicked: ControlEvent<Content>
-        let addButtonClicked: ControlEvent<Void>
+        let movieTap: ControlEvent<Content>
+        let tvTap: ControlEvent<Content>
+        let addButtonTap: ControlEvent<Void>
     }
     
     struct Output {
         let movieList: Observable<[Content]>
         let tvList: Observable<[Content]>
         let mainMedia: Observable<Content>
-        let movieClicked: ControlEvent<Content>
-        let tvClicked: ControlEvent<Content>
+        let movieTap: ControlEvent<Content>
+        let tvTap: ControlEvent<Content>
         let genreList: Observable<String>
         let showAlert: Observable<Content>
     }
@@ -94,7 +94,7 @@ final class HomeViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         
-        input.addButtonClicked
+        input.addButtonTap
             .withLatestFrom(mainMedia)
             .subscribe(with: self, onNext: { owner, value in
                 showAlert.onNext(value)
@@ -102,7 +102,7 @@ final class HomeViewModel: BaseViewModel {
             .disposed(by: disposeBag)
             
         
-        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieClicked: input.movieClicked, tvClicked: input.tvClicked, genreList: genreList, showAlert: showAlert)
+        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieTap: input.movieTap, tvTap: input.tvTap, genreList: genreList, showAlert: showAlert)
     }
     
 }

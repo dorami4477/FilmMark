@@ -47,9 +47,9 @@ final class HomeViewController: BaseViewController {
         mainView.gradientImageView.imageView.addGestureRecognizer(tapGesture)
         
         let input = HomeViewModel.Input(viewDidLoad: Observable.just(()),
-                                        movieClicked: mainView.moviesCollectionView.rx.modelSelected(Content.self),
-                                        tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self),
-                                        addButtonClicked: mainView.addButton.rx.tap)
+                                        movieTap: mainView.moviesCollectionView.rx.modelSelected(Content.self),
+                                        tvTap: mainView.tvCollectionView.rx.modelSelected(Content.self),
+                                        addButtonTap: mainView.addButton.rx.tap)
         let output = viewModel.transform(input: input)
         
         tapGesture.rx.event
@@ -57,7 +57,7 @@ final class HomeViewController: BaseViewController {
             .bind(with: self) { owner, value in
                 let detailVC = MediaDetailViewController()
                 detailVC.data = value
-                owner.navigationController?.pushViewController(detailVC, animated: true)
+                owner.present(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -67,19 +67,19 @@ final class HomeViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        output.movieClicked
+        output.movieTap
             .bind(with: self) { owner, movie in
                 let detailVC = MediaDetailViewController()
                 detailVC.data = movie
-                owner.navigationController?.pushViewController(detailVC, animated: true)
+                owner.present(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
         
-        output.tvClicked
+        output.tvTap
             .bind(with: self) { owner, tv in
                 let detailVC = MediaDetailViewController()
                 detailVC.data = tv
-                owner.navigationController?.pushViewController(detailVC, animated: true)
+                owner.present(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -94,13 +94,7 @@ final class HomeViewController: BaseViewController {
         
         output.showAlert
             .bind(onNext: { [weak self] value in
-                var newMedia: MyFilm = MyFilm()
-                
-                if let title = value.title {
-                    newMedia = MyFilm(id: value.id, title: title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
-                } else {
-                    newMedia = MyFilm(id: value.id, title: value.name, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
-                }
+                let newMedia = MyFilm(id: value.id, title: value.displayTitle, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
                 
                 guard let backURL = value.fullBackdropPath, let posterURL = value.fullPosterPath else { return }
                 self?.stringToUIImage([backURL, posterURL], completion: { value in
@@ -120,7 +114,6 @@ final class HomeViewController: BaseViewController {
         
         output.tvList
             .bind(with: self) { owner, value in
-                print(value)
                 owner.tvSection.onNext([
                     SectionOfData(header: "TV", items: value)
                 ])
