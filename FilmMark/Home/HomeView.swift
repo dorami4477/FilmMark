@@ -23,7 +23,7 @@ final class HomeView: BaseView {
     
     let gradientImageView = GradientImageView()
     
-    private let categoryLabel: UILabel = {
+    let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "애니메이션 가족 코메디 드라마"
         label.textColor = .white
@@ -64,7 +64,6 @@ final class HomeView: BaseView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
-        collectionView.backgroundColor = .blue
         return collectionView
     }()
     
@@ -75,7 +74,6 @@ final class HomeView: BaseView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
-        collectionView.backgroundColor = .red
         return collectionView
     }()
     

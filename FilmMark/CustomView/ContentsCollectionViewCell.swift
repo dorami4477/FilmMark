@@ -23,7 +23,6 @@ final class ContentsCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .cyan
         configureHierarchy()
         configureLayout()
     }
