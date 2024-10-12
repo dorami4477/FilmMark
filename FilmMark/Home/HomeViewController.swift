@@ -43,7 +43,8 @@ final class HomeViewController: BaseViewController {
     private func bind() {
         let input = HomeViewModel.Input(viewDidLoad: Observable.just(()),
                                         movieClicked: mainView.moviesCollectionView.rx.modelSelected(Content.self),
-                                        tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self))
+                                        tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self), 
+                                        addButtonClicked: mainView.addButton.rx.tap)
         let output = viewModel.transform(input: input)
         
         output.genreList
@@ -75,6 +76,13 @@ final class HomeViewController: BaseViewController {
                       let url = URL(string: imagePath) else { return }
                 owner.mainView.gradientImageView.imageView.kf.setImage(with: url)
             }
+            .disposed(by: disposeBag)
+        
+        output.showAlert
+            .bind(onNext: { [weak self] value in
+                let newMedia = MyFilm(id: value.id, title: value.title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
+                self?.presentLikeAlert(newMedia)
+            })
             .disposed(by: disposeBag)
         
         output.movieList

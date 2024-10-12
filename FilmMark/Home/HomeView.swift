@@ -36,7 +36,7 @@ final class HomeView: BaseView {
                                           textColor: Colors.black,
                                           icon: Icons.play)
     
-    private let addButton = RoundRectangleButton(title: "내가 찜한 리스트",
+    let addButton = RoundRectangleButton(title: "내가 찜한 리스트",
                                          bgColor: Colors.primaryColor,
                                          textColor: Colors.white,
                                          icon: Icons.plus)

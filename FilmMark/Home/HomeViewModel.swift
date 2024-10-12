@@ -11,12 +11,14 @@ import RxCocoa
 
 final class HomeViewModel: BaseViewModel {
     private let disposeBag = DisposeBag()
-    var mainMediaID: [Int]?
+    var mainMediaID: Int = 0
+    var mainMediaGenre: [Int]?
     
     struct Input {
         let viewDidLoad: Observable<Void>
         let movieClicked: ControlEvent<Content>
         let tvClicked: ControlEvent<Content>
+        let addButtonClicked: ControlEvent<Void>
     }
     
     struct Output {
@@ -26,6 +28,7 @@ final class HomeViewModel: BaseViewModel {
         let movieClicked: ControlEvent<Content>
         let tvClicked: ControlEvent<Content>
         let genreList: Observable<String>
+        let showAlert: Observable<Content>
     }
     
     func transform(input: Input) -> Output {
@@ -33,6 +36,7 @@ final class HomeViewModel: BaseViewModel {
         let tvList = PublishSubject<[Content]>()
         let mainMedia = PublishSubject<Content>()
         let genreList = PublishSubject<String>()
+        let showAlert = PublishSubject<Content>()
         
         input.viewDidLoad
             .flatMap { _ in
@@ -53,7 +57,8 @@ final class HomeViewModel: BaseViewModel {
                     let combinedResults = movieValue.results + tvValue.results
                     if let randomMedia = combinedResults.randomElement() {
                         mainMedia.onNext(randomMedia)
-                        owner.mainMediaID = randomMedia.genreIds
+                        owner.mainMediaGenre = randomMedia.genreIds
+                        owner.mainMediaID = randomMedia.id
                     }
                     
                 case (.failure(let movieError), _):
@@ -71,10 +76,9 @@ final class HomeViewModel: BaseViewModel {
                 NetworkService.shared.fetchResults(model: GenreList.self, requestCase: .genre)
             }
             .subscribe(with: self) { owner, result in
-
                 switch result {
                 case .success(let genreValue):
-                    if let ids = owner.mainMediaID {
+                    if let ids = owner.mainMediaGenre {
                         _ = ids.map { id in
                             let genres = genreValue.genres.filter { $0.id == id }
                             let genreNames = genres.map { $0.name }
@@ -90,7 +94,15 @@ final class HomeViewModel: BaseViewModel {
             .disposed(by: disposeBag)
         
         
-        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieClicked: input.movieClicked, tvClicked: input.tvClicked, genreList: genreList)
+        input.addButtonClicked
+            .withLatestFrom(mainMedia)
+            .subscribe(with: self, onNext: { owner, value in
+                showAlert.onNext(value)
+            })
+            .disposed(by: disposeBag)
+            
+        
+        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieClicked: input.movieClicked, tvClicked: input.tvClicked, genreList: genreList, showAlert: showAlert)
     }
     
 }

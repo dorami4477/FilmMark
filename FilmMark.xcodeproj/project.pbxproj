@@ -29,6 +29,7 @@
 		48FB73B52CBA0B4800A701E3 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 48FB73B42CBA0B4800A701E3 /* RxDataSources */; };
 		48FB73B72CBA0BF200A701E3 /* SectionOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73B62CBA0BF200A701E3 /* SectionOfData.swift */; };
 		48FB73B92CBA0CA400A701E3 /* MediaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73B82CBA0CA400A701E3 /* MediaDetailViewController.swift */; };
+		48FB73BD2CBA432E00A701E3 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73BC2CBA432E00A701E3 /* UIViewController + Extension.swift */; };
 		E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */; };
 		E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */; };
 		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
@@ -78,6 +79,7 @@
 		487C4ACF2CB94003004AA413 /* GenreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreList.swift; sourceTree = "<group>"; };
 		48FB73B62CBA0BF200A701E3 /* SectionOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfData.swift; sourceTree = "<group>"; };
 		48FB73B82CBA0CA400A701E3 /* MediaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailViewController.swift; sourceTree = "<group>"; };
+		48FB73BC2CBA432E00A701E3 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsBox.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				E0AACA832CB96263004A3552 /* CollectionViewLayout + Extension.swift */,
+				48FB73BC2CBA432E00A701E3 /* UIViewController + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
 				E0AACA782CB94217004A3552 /* SearchCollectionHeaderView.swift in Sources */,
 				487C4A902CB82FB5004AA413 /* TabBarController.swift in Sources */,
+				48FB73BD2CBA432E00A701E3 /* UIViewController + Extension.swift in Sources */,
 				48FB73B72CBA0BF200A701E3 /* SectionOfData.swift in Sources */,
 				E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */,
 				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
