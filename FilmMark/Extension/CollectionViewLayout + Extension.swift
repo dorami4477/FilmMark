@@ -29,6 +29,7 @@ extension UICollectionViewLayout {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 6
         section.boundarySupplementaryItems = [header]
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 16, trailing: 0)
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -54,6 +55,7 @@ extension UICollectionViewLayout {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
         section.interGroupSpacing = 24
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 16, trailing: 0)
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout

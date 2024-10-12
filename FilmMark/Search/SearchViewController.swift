@@ -71,8 +71,11 @@ class SearchViewController: BaseViewController {
     private func bind() {
         let searchKeyword = main.searchController.searchBar.rx.text
         let prefetchedIdxs = main.searchCollectionView.rx.prefetchItems
+        let trendContentsTapped = main.trendingCollectionView.rx.modelSelected(Content.self)
+        let searchContentsTapped = main.searchCollectionView.rx.modelSelected(Content.self)
         
-        let input = SearchViewModel.Input(searchKeyword: searchKeyword, prefetchedIdxs: prefetchedIdxs)
+        let input = SearchViewModel.Input(searchKeyword: searchKeyword, prefetchedIdxs: prefetchedIdxs,
+                                          trendContentsTapped: trendContentsTapped, searchContentsTapped: searchContentsTapped)
         let output = vm.transform(input: input)
         
         // 키워드가 비어있는지에 따라 trendingCollectionView 보이거나 안 보이게
@@ -98,9 +101,29 @@ class SearchViewController: BaseViewController {
             .bind(to: main.searchCollectionView.rx.items(dataSource: searchResultsDataSource))
             .disposed(by: disposeBag)
         
-        // 트렌딩 결과 dataSource에 반영 
+        // 트렌딩 결과 dataSource에 반영
         output.trendingResults
             .bind(to: main.trendingCollectionView.rx.items(dataSource: trendingDataSource))
+            .disposed(by: disposeBag)
+        
+        // 트렌딩 콘텐츠 탭 -> 상세뷰
+        output.trendContentsTapped
+            .asSignal()
+            .emit(with: self) { owner, value in
+                let vc = MediaDetailViewController()
+                vc.data = value
+                owner.present(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        // 검색 콘텐츠 탭 -> 상세뷰
+        output.searchContentsTapped
+            .asSignal()
+            .emit(with: self) { owner, value in
+                let vc = MediaDetailViewController()
+                vc.data = value
+                owner.present(vc, animated: true)
+            }
             .disposed(by: disposeBag)
     }
     

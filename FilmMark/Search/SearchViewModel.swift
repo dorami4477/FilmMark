@@ -15,6 +15,8 @@ final class SearchViewModel: BaseViewModel {
     struct Input {
         let searchKeyword: ControlProperty<String?> // 검색 키워드
         let prefetchedIdxs: ControlEvent<[IndexPath]> // 스크롤 된 인덱스
+        let trendContentsTapped: ControlEvent<Content> // 트렌딩 영화 눌렀을 때
+        let searchContentsTapped: ControlEvent<Content> // 검색된 영화 눌렀을 때
     }
     
     struct Output {
@@ -23,6 +25,8 @@ final class SearchViewModel: BaseViewModel {
         let isEmptyResults: BehaviorRelay<Bool> // 빈 검색결과인지
         let searchedResults: BehaviorRelay<[SectionOfData<Content>]> // 검색결과
         let trendingResults: BehaviorRelay<[SectionOfData<Content>]>
+        let trendContentsTapped: ControlEvent<Content>
+        let searchContentsTapped: ControlEvent<Content>
     }
     
     func transform(input: Input) -> Output {
@@ -110,6 +114,7 @@ final class SearchViewModel: BaseViewModel {
         
         return Output(isEmptyKeyword: isEmptyKeyword, scrollToTop: scrollToTop,
                       isEmptyResults: isEmptyResults, searchedResults: searchedResults,
-                      trendingResults: trendingResults)
+                      trendingResults: trendingResults, trendContentsTapped: input.trendContentsTapped,
+                      searchContentsTapped: input.searchContentsTapped)
     }
 }
