@@ -32,7 +32,8 @@ class MediaDetailViewController: BaseViewController {
         
         let input = MediaDetailViewModel.Input(
             content: Observable.just(data),
-            viewDidLoad: Observable.just(())
+            viewDidLoad: Observable.just(()), 
+            addButtonTap: mediaDetailView.saveButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
@@ -51,9 +52,21 @@ class MediaDetailViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        mediaDetailView.saveButton.rx.tap
-            .bind { 
-                print("저장 버튼이 탭되었습니다.")
+        mediaDetailView.closeButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.showAlert
+            .bind(with: self) { owner, value in
+                let newMedia = MyFilm(id: value.id, title: value.displayTitle, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
+                
+                guard let backURL = value.fullBackdropPath, let posterURL = value.fullPosterPath else { return }
+                owner.stringToUIImage([backURL, posterURL]) { value in
+                    guard let back = value[0], let poster = value[1] else { return }
+                    owner.presentLikeAlert(newMedia, backdropImage: back, posterImage: poster)
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -61,7 +74,7 @@ class MediaDetailViewController: BaseViewController {
     private func configureContent() {
         guard let data = data else { return }
         
-        if let posterPath = data.fullPosterPath, let url = URL(string: posterPath) {
+        if let posterPath = data.fullBackdropPath, let url = URL(string: posterPath) {
             mediaDetailView.posterImageView.kf.setImage(with: url)
         }
         
