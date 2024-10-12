@@ -95,7 +95,13 @@ final class HomeViewController: BaseViewController {
         output.showAlert
             .bind(onNext: { [weak self] value in
                 let newMedia = MyFilm(id: value.id, title: value.title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
-                self?.presentLikeAlert(newMedia)
+                
+                guard let urlString = value.fullPosterPath else { return }
+                self?.stringToUIImage(urlString) { image in
+                    guard let image else { return }
+                    self?.presentLikeAlert(newMedia, image: image)
+                }
+                
             })
             .disposed(by: disposeBag)
         

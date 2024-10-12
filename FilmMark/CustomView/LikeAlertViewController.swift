@@ -22,12 +22,12 @@ final class LikeAlertViewController: BaseViewController {
     private let backgroundView = UIView()
     private let confirmButton = RoundRectangleButton(title: "확인", bgColor: Colors.primaryColor, textColor: Colors.white, icon: nil)
     private let messageLabel = UILabel()
-    private var content = BehaviorRelay(value: MyFilm())
+    private var content = BehaviorRelay<(MyFilm, UIImage?)>(value: (MyFilm(), nil))
     
     // 저장하고 싶은 콘텐츠 받아오기 
-    init(content: MyFilm) {
+    init(content: MyFilm, image: UIImage) {
         super.init(nibName: nil, bundle: nil)
-        self.content.accept(content)
+        self.content.accept((content, image))
     }
     
     override func viewDidLoad() {
@@ -76,13 +76,16 @@ final class LikeAlertViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         content
-            .bind(with: self) { owner, value in
+            .bind(with: self) { owner, result in
+                let (myfilm, image) = result
                 // Realm에 저장된 상태인지에 따라 텍스트 다르게
-                let isValid = owner.myFilmRepo.isContainsFilm(value.id)
+                let isValid = owner.myFilmRepo.isContainsFilm(myfilm.id)
                 owner.messageLabel.text = isValid ? AlertMessage.isValid.rawValue : AlertMessage.isNonValid.rawValue
                 // 저장되지 않은 데이터라면 Realm에 저장
                 guard !isValid else { return }
-                owner.myFilmRepo.createMyFilm(value)
+                owner.myFilmRepo.createMyFilm(myfilm)
+                guard let image else { return }
+                DocumentManager.shared.saveImage(imageName: "\(myfilm.id)", image: image)
             }
             .disposed(by: disposeBag)
     }
