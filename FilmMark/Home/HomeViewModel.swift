@@ -14,12 +14,16 @@ final class HomeViewModel: BaseViewModel {
     
     struct Input {
         let viewDidLoad: Observable<Void>
+        let movieClicked: ControlEvent<Content>
+        let tvClicked: ControlEvent<Content>
     }
     
     struct Output {
         let movieList: Observable<[Content]>
         let tvList: Observable<[Content]>
         let mainMedia: Observable<Content>
+        let movieClicked: ControlEvent<Content>
+        let tvClicked: ControlEvent<Content>
     }
     
     func transform(input: Input) -> Output {
@@ -57,8 +61,7 @@ final class HomeViewModel: BaseViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia)
+        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieClicked: input.movieClicked, tvClicked: input.tvClicked)
     }
     
 }
-

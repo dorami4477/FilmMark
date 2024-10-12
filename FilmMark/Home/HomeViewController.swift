@@ -41,8 +41,27 @@ final class HomeViewController: BaseViewController {
     }
     
     private func bind() {
-        let input = HomeViewModel.Input(viewDidLoad: Observable.just(()))
+        let input = HomeViewModel.Input(viewDidLoad: Observable.just(()),
+                                        movieClicked: mainView.moviesCollectionView.rx.modelSelected(Content.self),
+                                        tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self))
         let output = viewModel.transform(input: input)
+        
+        output.movieClicked
+            .bind(with: self) { owner, movie in
+                let detailVC = MediaDetailViewController()
+                detailVC.data = movie
+                owner.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.tvClicked
+            .bind(with: self) { owner, tv in
+                let detailVC = MediaDetailViewController()
+                detailVC.data = tv
+                owner.navigationController?.pushViewController(detailVC, animated: true)
+            }
+            .disposed(by: disposeBag)
+    
         
         output.mainMedia
             .bind(with: self) { owner, value in
