@@ -64,7 +64,6 @@ final class HomeView: BaseView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
-        collectionView.backgroundColor = .blue
         return collectionView
     }()
     
@@ -75,7 +74,6 @@ final class HomeView: BaseView {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
-        collectionView.backgroundColor = .red
         return collectionView
     }()
     
