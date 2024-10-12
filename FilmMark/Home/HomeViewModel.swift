@@ -11,6 +11,7 @@ import RxCocoa
 
 final class HomeViewModel: BaseViewModel {
     private let disposeBag = DisposeBag()
+    var mainMediaID: [Int]?
     
     struct Input {
         let viewDidLoad: Observable<Void>
@@ -24,12 +25,14 @@ final class HomeViewModel: BaseViewModel {
         let mainMedia: Observable<Content>
         let movieClicked: ControlEvent<Content>
         let tvClicked: ControlEvent<Content>
+        let genreList: Observable<String>
     }
     
     func transform(input: Input) -> Output {
         let movieList = PublishSubject<[Content]>()
         let tvList = PublishSubject<[Content]>()
         let mainMedia = PublishSubject<Content>()
+        let genreList = PublishSubject<String>()
         
         input.viewDidLoad
             .flatMap { _ in
@@ -50,6 +53,7 @@ final class HomeViewModel: BaseViewModel {
                     let combinedResults = movieValue.results + tvValue.results
                     if let randomMedia = combinedResults.randomElement() {
                         mainMedia.onNext(randomMedia)
+                        owner.mainMediaID = randomMedia.genreIds
                     }
                     
                 case (.failure(let movieError), _):
@@ -61,7 +65,32 @@ final class HomeViewModel: BaseViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieClicked: input.movieClicked, tvClicked: input.tvClicked)
+        
+        input.viewDidLoad
+            .flatMap { _ in
+                NetworkService.shared.fetchResults(model: GenreList.self, requestCase: .genre)
+            }
+            .subscribe(with: self) { owner, result in
+
+                switch result {
+                case .success(let genreValue):
+                    if let ids = owner.mainMediaID {
+                        _ = ids.map { id in
+                            let genres = genreValue.genres.filter { $0.id == id }
+                            let genreNames = genres.map { $0.name }
+                            let combinedGenres = genreNames.joined(separator: " ")
+                            genreList.onNext(combinedGenres)
+                        }
+                    }
+                    
+                case .failure(let genreError):
+                    print("Genre fetch error: \(genreError)")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        
+        return Output(movieList: movieList, tvList: tvList, mainMedia: mainMedia, movieClicked: input.movieClicked, tvClicked: input.tvClicked, genreList: genreList)
     }
     
 }

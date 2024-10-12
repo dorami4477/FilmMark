@@ -46,6 +46,12 @@ final class HomeViewController: BaseViewController {
                                         tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self))
         let output = viewModel.transform(input: input)
         
+        output.genreList
+            .bind(with: self) { owner, value in
+                owner.mainView.categoryLabel.text = value
+            }
+            .disposed(by: disposeBag)
+        
         output.movieClicked
             .bind(with: self) { owner, movie in
                 let detailVC = MediaDetailViewController()
