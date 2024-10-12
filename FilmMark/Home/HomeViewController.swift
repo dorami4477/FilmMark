@@ -20,7 +20,7 @@ final class HomeViewController: BaseViewController {
     private var tvDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
     private var movieSection: PublishSubject<[SectionOfData<Content>]> = PublishSubject()
     private var tvSection: PublishSubject<[SectionOfData<Content>]> = PublishSubject()
-
+    
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -41,14 +41,14 @@ final class HomeViewController: BaseViewController {
         configureDataSource()
         bind()
     }
-
+    
     private func bind() {
         let tapGesture = UITapGestureRecognizer()
         mainView.gradientImageView.imageView.addGestureRecognizer(tapGesture)
         
         let input = HomeViewModel.Input(viewDidLoad: Observable.just(()),
                                         movieClicked: mainView.moviesCollectionView.rx.modelSelected(Content.self),
-                                        tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self), 
+                                        tvClicked: mainView.tvCollectionView.rx.modelSelected(Content.self),
                                         addButtonClicked: mainView.addButton.rx.tap)
         let output = viewModel.transform(input: input)
         
@@ -82,7 +82,7 @@ final class HomeViewController: BaseViewController {
                 owner.navigationController?.pushViewController(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
-    
+        
         
         output.mainMedia
             .bind(with: self) { owner, value in
@@ -134,7 +134,7 @@ final class HomeViewController: BaseViewController {
         self.tvSection
             .bind(to: mainView.tvCollectionView.rx.items(dataSource: tvDataSource))
             .disposed(by: disposeBag)
-    
+        
     }
     
     private func configureDataSource() {
@@ -155,7 +155,6 @@ final class HomeViewController: BaseViewController {
                 return UICollectionReusableView()
             }
         )
-        
     }
     
     private func configureCell(for collectionView: UICollectionView, at indexPath: IndexPath, with item: Content) -> UICollectionViewCell {
@@ -173,7 +172,7 @@ final class HomeViewController: BaseViewController {
         let searchButton = UIButton(type: .system)
         searchButton.setImage(Icons.search, for: .normal)
         searchButton.tintColor = Colors.black
-
+        
         let stackView = UIStackView(arrangedSubviews: [tvButton, searchButton])
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -181,5 +180,4 @@ final class HomeViewController: BaseViewController {
         let rightBarButton = UIBarButtonItem(customView: stackView)
         navigationItem.rightBarButtonItem = rightBarButton
     }
-    
 }

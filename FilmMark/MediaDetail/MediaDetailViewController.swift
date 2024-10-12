@@ -6,70 +6,67 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import Kingfisher
 
 class MediaDetailViewController: BaseViewController {
+    private let disposeBag = DisposeBag()
+    var data: Content?
     
-    private let mainView = MediaDetailView()
-    var data: Content? = nil
+    private let mediaDetailView = MediaDetailView()
+    private let viewModel = MediaDetailViewModel()
     
     override func loadView() {
-        view = mainView
+        view = mediaDetailView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
-        configureWithData()
-        setupActions()
+        bindViewModel()
+        configureContent()
     }
     
-    private func setupCollectionView() {
-        mainView.similarContentCollectionView.dataSource = self
-        mainView.similarContentCollectionView.delegate = self
-        mainView.similarContentCollectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
+    private func bindViewModel() {
+        guard let data = data else { return }
+        
+        let input = MediaDetailViewModel.Input(
+            content: Observable.just(data),
+            viewDidLoad: Observable.just(())
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.similarContent
+            .bind(to: mediaDetailView.similarContentCollectionView.rx.items(cellIdentifier: ContentsCollectionViewCell.id, cellType: ContentsCollectionViewCell.self)) { _, item, cell in
+                if let posterPath = item.fullPosterPath, let url = URL(string: posterPath) {
+                    cell.imageView.kf.setImage(with: url)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        mediaDetailView.playButton.rx.tap
+            .bind {
+                print("재생 버튼이 탭되었습니다.")
+            }
+            .disposed(by: disposeBag)
+        
+        mediaDetailView.saveButton.rx.tap
+            .bind { 
+                print("저장 버튼이 탭되었습니다.")
+            }
+            .disposed(by: disposeBag)
     }
     
-    private func configureWithData() {
+    private func configureContent() {
         guard let data = data else { return }
         
         if let posterPath = data.fullPosterPath, let url = URL(string: posterPath) {
-            mainView.posterImageView.kf.setImage(with: url)
+            mediaDetailView.posterImageView.kf.setImage(with: url)
         }
         
-        mainView.titleLabel.text = data.title
-        mainView.ratingLabel.text = data.formattedVoteAverage
-        mainView.descriptionLabel.text = data.overview
-    }
-    
-    private func setupActions() {
-        mainView.playButton.addTarget(self, action: #selector(playTapped), for: .touchUpInside)
-        mainView.saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
-    }
-    
-    @objc private func playTapped() {
-        //재생버튼 누를때 액션 구현 예정
-    }
-    
-    @objc private func saveTapped() {
-        //저장버튼 누늘때 액션 구현 예정
-    }
-}
-
-extension MediaDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6 // 예시로 6개의 아이템을 표시
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.id, for: indexPath) as? ContentsCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        // dummy 이미지 URL
-        let imageURL = URL(string: "https://picsum.photos/100/150?random=\(indexPath.item)")
-        cell.imageView.kf.setImage(with: imageURL)
-        
-        return cell
+        mediaDetailView.titleLabel.text = data.displayTitle
+        mediaDetailView.descriptionLabel.text = data.overview
+        mediaDetailView.ratingLabel.text = data.formattedVoteAverage
     }
 }

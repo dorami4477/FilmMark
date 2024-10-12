@@ -48,9 +48,25 @@ class MediaDetailView: BaseView {
         return label
     }()
     
-    let playButton = RoundRectangleButton(title: "재생", bgColor: Colors.systemGray5, textColor: Colors.primaryColor, icon: Icons.play)
+    lazy var playButton: RoundRectangleButton = {
+        let button = RoundRectangleButton(
+            title: "재생",
+            bgColor: Colors.systemGray5,
+            textColor: Colors.primaryColor,
+            icon: Icons.play
+        )
+        return button
+    }()
     
-    let saveButton = RoundRectangleButton(title: "저장", bgColor: Colors.primaryColor , textColor: .white, icon: Icons.down)
+    lazy var saveButton: RoundRectangleButton = {
+        let button = RoundRectangleButton(
+            title: "저장",
+            bgColor: Colors.primaryColor,
+            textColor: .white,
+            icon: Icons.down
+        )
+        return button
+    }()
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -76,6 +92,7 @@ class MediaDetailView: BaseView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.showsHorizontalScrollIndicator = false
+        cv.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
         return cv
     }()
     

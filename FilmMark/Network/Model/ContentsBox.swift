@@ -15,7 +15,8 @@ struct ContentsBox: Decodable {
 struct Content: Decodable {
     let id: Int
     let backdropPath: String?
-    let title: String?
+    let title: String? // movie title
+    let name: String? // tv title
     let overview: String?
     let posterPath: String?
     let genreIds: [Int]?
@@ -30,6 +31,7 @@ struct Content: Decodable {
         case id
         case backdropPath = "backdrop_path"
         case title
+        case name
         case overview
         case posterPath = "poster_path"
         case genreIds = "genre_ids"
@@ -39,6 +41,10 @@ struct Content: Decodable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
         case mediaType = "media_type"
+    }
+    
+    var displayTitle: String {
+        return title ?? name ?? "Unknown Title"
     }
 }
 

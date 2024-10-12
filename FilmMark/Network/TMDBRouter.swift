@@ -14,6 +14,8 @@ enum TMDBRouter {
     case trendingMovie
     case trendingTV
     case genre
+    case similarMovie(id: Int)
+    case similarTV(id: Int)
 }
 
 extension TMDBRouter: TargetType {
@@ -33,6 +35,10 @@ extension TMDBRouter: TargetType {
             return "trending/tv/day"
         case .genre:
             return "genre/movie/list"
+        case .similarMovie(let id):
+            return "movie/\(id)/similar"
+        case .similarTV(let id):
+            return "tv/\(id)/similar"
         }
     }
     
@@ -61,15 +67,7 @@ extension TMDBRouter: TargetType {
                 URLQueryItem(name: "page", value: "\(page)"),
                 URLQueryItem(name: "language", value: "ko-KR")
             ]
-        case .trendingMovie:
-            return [
-                URLQueryItem(name: "language", value: "ko-KR")
-            ]
-        case .trendingTV:
-            return [
-                URLQueryItem(name: "language", value: "ko-KR")
-            ]
-        case .genre:
+        case .trendingMovie, .trendingTV, .genre, .similarMovie, .similarTV:
             return [
                 URLQueryItem(name: "language", value: "ko-KR")
             ]
