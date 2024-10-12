@@ -26,6 +26,8 @@
 		487C4AC52CB8F59B004AA413 /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4AC42CB8F59B004AA413 /* ContentsCollectionViewCell.swift */; };
 		487C4AC72CB914CB004AA413 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4AC62CB914CB004AA413 /* HomeViewModel.swift */; };
 		487C4AD02CB94003004AA413 /* GenreList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C4ACF2CB94003004AA413 /* GenreList.swift */; };
+		48FB73B52CBA0B4800A701E3 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 48FB73B42CBA0B4800A701E3 /* RxDataSources */; };
+		48FB73B72CBA0BF200A701E3 /* SectionOfData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FB73B62CBA0BF200A701E3 /* SectionOfData.swift */; };
 		E0AAC9E32CB7D8BE004A3552 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */; };
 		E0AAC9E52CB7DBE7004A3552 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */; };
 		E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0AAC9E72CB7DC01004A3552 /* RxCocoa */; };
@@ -73,6 +75,7 @@
 		487C4AC42CB8F59B004AA413 /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		487C4AC62CB914CB004AA413 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		487C4ACF2CB94003004AA413 /* GenreList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreList.swift; sourceTree = "<group>"; };
+		48FB73B62CBA0BF200A701E3 /* SectionOfData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionOfData.swift; sourceTree = "<group>"; };
 		E0AAC9E22CB7D8BE004A3552 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E0AAC9E42CB7DBE7004A3552 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E0AAC9F52CB81C48004A3552 /* ContentsBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsBox.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 				E0C45D2E2CB52BD500E94B31 /* Kingfisher in Frameworks */,
 				E0C45D312CB52BEF00E94B31 /* Alamofire in Frameworks */,
 				E0AAC9E82CB7DC01004A3552 /* RxCocoa in Frameworks */,
+				48FB73B52CBA0B4800A701E3 /* RxDataSources in Frameworks */,
 				E0C45D282CB52BAC00E94B31 /* RealmSwift in Frameworks */,
 				E0C45D2B2CB52BBC00E94B31 /* SnapKit in Frameworks */,
 			);
@@ -166,6 +170,7 @@
 				487C4A932CB8302D004AA413 /* HomeViewController.swift */,
 				487C4ABD2CB8E381004AA413 /* HomeView.swift */,
 				487C4AC62CB914CB004AA413 /* HomeViewModel.swift */,
+				48FB73B62CBA0BF200A701E3 /* SectionOfData.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -257,6 +262,9 @@
 			dependencies = (
 			);
 			name = FilmMark;
+			packageProductDependencies = (
+				48FB73B42CBA0B4800A701E3 /* RxDataSources */,
+			);
 			productName = FilmMark;
 			productReference = 483BAF052CB52591007DABFA /* FilmMark.app */;
 			productType = "com.apple.product-type.application";
@@ -291,6 +299,7 @@
 				E0C45D2C2CB52BD500E94B31 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E0C45D2F2CB52BEF00E94B31 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				48FB73B32CBA0B4800A701E3 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 483BAF062CB52591007DABFA /* Products */;
 			projectDirPath = "";
@@ -329,6 +338,7 @@
 				483BAF222CB5275B007DABFA /* BaseViewModel.swift in Sources */,
 				E0AACA782CB94217004A3552 /* SearchCollectionHeaderView.swift in Sources */,
 				487C4A902CB82FB5004AA413 /* TabBarController.swift in Sources */,
+				48FB73B72CBA0BF200A701E3 /* SectionOfData.swift in Sources */,
 				E0AAC9F62CB81C48004A3552 /* ContentsBox.swift in Sources */,
 				E0C45D942CB63CD200E94B31 /* TMDBRouter.swift in Sources */,
 				487C4AC12CB8E77F004AA413 /* RoundRectangleButton.swift in Sources */,
@@ -576,6 +586,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		48FB73B32CBA0B4800A701E3 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -619,6 +637,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		48FB73B42CBA0B4800A701E3 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48FB73B32CBA0B4800A701E3 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		E0AAC9E72CB7DC01004A3552 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E0AAC9E62CB7DC01004A3552 /* XCRemoteSwiftPackageReference "RxSwift" */;

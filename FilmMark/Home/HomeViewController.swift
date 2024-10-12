@@ -8,11 +8,18 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
+import Kingfisher
 
 final class HomeViewController: BaseViewController {
-
+    private let disposeBag = DisposeBag()
     private let mainView = HomeView()
     let viewModel: HomeViewModel
+    private var movieDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
+    private var tvDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
+    private var movieSection: PublishSubject<[SectionOfData<Content>]> = PublishSubject()
+    private var tvSection: PublishSubject<[SectionOfData<Content>]> = PublishSubject()
+
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -29,29 +36,74 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureDataSource()
         bind()
-        mainView.moviesCollectionView.delegate = self
-        mainView.moviesCollectionView.dataSource = self
-        mainView.tvCollectionView.delegate = self
-        mainView.tvCollectionView.dataSource = self
     }
     
     private func bind() {
         let input = HomeViewModel.Input(viewDidLoad: Observable.just(()))
-        let _ = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input)
+        
+        output.mainMedia
+            .bind(with: self) { owner, value in
+                guard let imagePath = value.fullPosterPath,
+                      let url = URL(string: imagePath) else { return }
+                owner.mainView.gradientImageView.imageView.kf.setImage(with: url)
+            }
+            .disposed(by: disposeBag)
+        
+        output.movieList
+            .bind(with: self) { owner, value in
+                owner.movieSection.onNext([
+                    SectionOfData(header: "영화", items: value)
+                ])
+            }
+            .disposed(by: disposeBag)
+        
+        output.tvList
+            .bind(with: self) { owner, value in
+                owner.tvSection.onNext([
+                    SectionOfData(header: "TV", items: value)
+                ])
+            }
+            .disposed(by: disposeBag)
+        
+        self.movieSection
+            .bind(to: mainView.moviesCollectionView.rx.items(dataSource: movieDataSource))
+            .disposed(by: disposeBag)
+        
+        self.tvSection
+            .bind(to: mainView.tvCollectionView.rx.items(dataSource: tvDataSource))
+            .disposed(by: disposeBag)
+    
     }
     
-}
-
-extension HomeViewController:UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+    private func configureDataSource() {
+        movieDataSource = RxCollectionViewSectionedReloadDataSource<SectionOfData>(
+            configureCell: { _, collectionView, indexPath, item in
+                return self.configureCell(for: collectionView, at: indexPath, with: item)
+            },
+            configureSupplementaryView: { _, collectionView, kind, indexPath in
+                return UICollectionReusableView()
+            }
+        )
+        
+        tvDataSource = RxCollectionViewSectionedReloadDataSource<SectionOfData>(
+            configureCell: { _, collectionView, indexPath, item in
+                return self.configureCell(for: collectionView, at: indexPath, with: item)
+            },
+            configureSupplementaryView: { _, collectionView, kind, indexPath in
+                return UICollectionReusableView()
+            }
+        )
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.id, for: indexPath) as? ContentsCollectionViewCell else { return UICollectionViewCell() }
-        cell.imageView.backgroundColor = .gray
+    private func configureCell(for collectionView: UICollectionView, at indexPath: IndexPath, with item: Content) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.id, for: indexPath) as! ContentsCollectionViewCell
+        guard let imagePath = item.fullPosterPath, let url = URL(string: imagePath) else { return UICollectionViewCell() }
+        cell.imageView.kf.setImage(with: url)
         return cell
     }
+    
 }
