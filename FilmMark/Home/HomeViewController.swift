@@ -96,11 +96,11 @@ final class HomeViewController: BaseViewController {
             .bind(onNext: { [weak self] value in
                 let newMedia = MyFilm(id: value.id, title: value.title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
                 
-                guard let urlString = value.fullPosterPath else { return }
-                self?.stringToUIImage(urlString) { image in
-                    guard let image else { return }
-                    self?.presentLikeAlert(newMedia, image: image)
-                }
+                guard let backURL = value.fullBackdropPath, let posterURL = value.fullPosterPath else { return }
+                self?.stringToUIImage([posterURL, backURL], completion: { value in
+                    guard let back = value[0], let poster = value[1] else { return }
+                    self?.presentLikeAlert(newMedia, backdropImage: back, posterImage: poster)
+                })
                 
             })
             .disposed(by: disposeBag)
