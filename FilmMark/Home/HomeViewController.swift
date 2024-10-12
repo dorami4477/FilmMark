@@ -94,14 +94,19 @@ final class HomeViewController: BaseViewController {
         
         output.showAlert
             .bind(onNext: { [weak self] value in
-                let newMedia = MyFilm(id: value.id, title: value.title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
+                var newMedia: MyFilm = MyFilm()
+                
+                if let title = value.title {
+                    newMedia = MyFilm(id: value.id, title: title, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
+                } else {
+                    newMedia = MyFilm(id: value.id, title: value.name, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
+                }
                 
                 guard let backURL = value.fullBackdropPath, let posterURL = value.fullPosterPath else { return }
                 self?.stringToUIImage([backURL, posterURL], completion: { value in
                     guard let back = value[0], let poster = value[1] else { return }
                     self?.presentLikeAlert(newMedia, backdropImage: back, posterImage: poster)
                 })
-                
             })
             .disposed(by: disposeBag)
         
@@ -115,6 +120,7 @@ final class HomeViewController: BaseViewController {
         
         output.tvList
             .bind(with: self) { owner, value in
+                print(value)
                 owner.tvSection.onNext([
                     SectionOfData(header: "TV", items: value)
                 ])
