@@ -15,6 +15,7 @@ final class HomeViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private let mainView = HomeView()
     let viewModel: HomeViewModel
+    
     private var movieDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
     private var tvDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
     private var movieSection: PublishSubject<[SectionOfData<Content>]> = PublishSubject()
@@ -36,6 +37,7 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationItem()
         configureDataSource()
         bind()
     }
@@ -137,6 +139,23 @@ final class HomeViewController: BaseViewController {
         guard let imagePath = item.fullPosterPath, let url = URL(string: imagePath) else { return UICollectionViewCell() }
         cell.imageView.kf.setImage(with: url)
         return cell
+    }
+    
+    private func setNavigationItem() {
+        let tvButton = UIButton(type: .system)
+        tvButton.setImage(Icons.tv, for: .normal)
+        tvButton.tintColor = Colors.black
+        
+        let searchButton = UIButton(type: .system)
+        searchButton.setImage(Icons.search, for: .normal)
+        searchButton.tintColor = Colors.black
+
+        let stackView = UIStackView(arrangedSubviews: [tvButton, searchButton])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        
+        let rightBarButton = UIBarButtonItem(customView: stackView)
+        navigationItem.rightBarButtonItem = rightBarButton
     }
     
 }

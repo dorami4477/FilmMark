@@ -25,7 +25,6 @@ final class HomeView: BaseView {
     
     let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "애니메이션 가족 코메디 드라마"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
@@ -161,6 +160,5 @@ final class HomeView: BaseView {
     
     override func configureView() {
         backgroundColor = .white
-        gradientImageView.imageView.image = UIImage(systemName: "heart")
     }
 }

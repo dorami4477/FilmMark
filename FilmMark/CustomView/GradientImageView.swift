@@ -27,7 +27,6 @@ final class GradientImageView: UIView {
     
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .orange
         addSubview(imageView)
         
         imageView.snp.makeConstraints { make in
