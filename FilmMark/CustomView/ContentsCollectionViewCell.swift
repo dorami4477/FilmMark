@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 // MARK: - common collection cell
 final class ContentsCollectionViewCell: UICollectionViewCell {
@@ -35,6 +36,11 @@ final class ContentsCollectionViewCell: UICollectionViewCell {
         imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    func configureCell(_ content: Content) {
+        guard let path = content.fullPosterPath, let url = URL(string: path) else { return }
+        imageView.kf.setImage(with: url)
     }
     
     required init?(coder: NSCoder) {
