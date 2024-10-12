@@ -15,25 +15,45 @@ class MediaDetailView: BaseView {
     
     let posterImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
     
     let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(Icons.close, for: .normal)
-        button.tintColor = Colors.primaryColor
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = Icons.tv
+        configuration.baseForegroundColor = Colors.white
+        configuration.background.backgroundColor = Colors.black.withAlphaComponent(0.5)
+        configuration.background.cornerRadius = 18
+        configuration.imagePadding = 8
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 13)
+        configuration.image = Icons.close?.withConfiguration(imageConfig)
+        
+        let button = UIButton(configuration: configuration, primaryAction: nil)
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
         return button
     }()
     
     let addToListButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(Icons.tv, for: .normal)
-        button.tintColor = Colors.primaryColor
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = Icons.tv
+        configuration.baseForegroundColor = Colors.white
+        configuration.background.backgroundColor = Colors.black.withAlphaComponent(0.5)
+        configuration.background.cornerRadius = 18
+        configuration.imagePadding = 8
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 13)
+        configuration.image = Icons.tv?.withConfiguration(imageConfig)
+        
+        let button = UIButton(configuration: configuration, primaryAction: nil)
+        button.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
         return button
     }()
-    
+
     let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.bold20
@@ -86,9 +106,13 @@ class MediaDetailView: BaseView {
     
     let similarContentCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 100, height: 150)
+        let itemWidth = UIScreen.main.bounds.width / 3 - 20
+        
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .clear
         cv.showsHorizontalScrollIndicator = false
@@ -120,13 +144,13 @@ class MediaDetailView: BaseView {
         
         closeButton.snp.makeConstraints { make in
             make.top.trailing.equalTo(posterImageView).inset(16)
-            make.size.equalTo(44)
+            make.size.equalTo(36)
         }
         
         addToListButton.snp.makeConstraints { make in
             make.top.equalTo(posterImageView).inset(16)
-            make.trailing.equalTo(closeButton.snp.leading).offset(-16)
-            make.size.equalTo(44)
+            make.trailing.equalTo(closeButton.snp.leading).offset(-8)
+            make.size.equalTo(36)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -163,7 +187,7 @@ class MediaDetailView: BaseView {
         
         similarContentCollectionView.snp.makeConstraints { make in
             make.top.equalTo(similarContentLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(170)
             make.bottom.equalToSuperview().inset(16)
         }

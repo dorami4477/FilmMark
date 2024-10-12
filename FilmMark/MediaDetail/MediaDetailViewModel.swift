@@ -15,14 +15,17 @@ class MediaDetailViewModel {
     struct Input {
         let content: Observable<Content>
         let viewDidLoad: Observable<Void>
+        let addButtonTap: ControlEvent<Void>
     }
     
     struct Output {
         let similarContent: Observable<[Content]>
+        let showAlert: Observable<Content>
     }
     
     func transform(input: Input) -> Output {
         let similarContent = PublishSubject<[Content]>()
+        let showAlert = PublishSubject<Content>()
         
         input.content
             .flatMap { content -> Observable<Result<ContentsBox, NetworkService.NetworkErrorCase>> in
@@ -41,6 +44,13 @@ class MediaDetailViewModel {
             })
             .disposed(by: disposeBag)
         
-        return Output(similarContent: similarContent.asObservable())
+        input.addButtonTap
+            .withLatestFrom(input.content)
+            .subscribe(with: self, onNext: { owner, value in
+                showAlert.onNext(value)
+            })
+            .disposed(by: disposeBag)
+        
+        return Output(similarContent: similarContent.asObservable(), showAlert: showAlert)
     }
 }
