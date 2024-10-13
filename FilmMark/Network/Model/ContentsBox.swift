@@ -59,7 +59,7 @@ struct Content: Decodable {
 
 extension Content {
     private var imagePath: String { // 이미지 링크
-        return "https://image.tmdb.org/t/p/w300"
+        return "https://image.tmdb.org/t/p/w500"
     }
     
     var fullPosterPath: String? { // 포스터 이미지 링크
