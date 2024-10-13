@@ -32,7 +32,6 @@ final class MyFilmViewController: BaseViewController {
     
     private func configureNavigationBar() {
         navigationItem.title = "내가 찜한 리스트"
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func loadFilms() {
@@ -84,6 +83,7 @@ extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
         guard let film = films?[indexPath.row] else { return }
         
         let detailVC = MediaDetailViewController()
+       
         let content = Content(id: film.id,
                               backdropPath: nil,
                               title: film.title,
@@ -98,7 +98,7 @@ extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
                               voteCount: nil,
                               mediaType: film.mediaType)
         detailVC.data = content
-        navigationController?.pushViewController(detailVC, animated: true)
+        present(detailVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
