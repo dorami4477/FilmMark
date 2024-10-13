@@ -50,7 +50,7 @@ class MediaDetailView: BaseView {
         return button
     }()
     
-    let similarContentCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .contentsGridLayout(heightDimensionValue: 0.35))
+    let similarContentCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .similarContentsLayout())
     
     override func configureHierarchy() {
         [posterImageView, closeButton, addToListButton, similarContentCollectionView].forEach { addSubview($0) }
