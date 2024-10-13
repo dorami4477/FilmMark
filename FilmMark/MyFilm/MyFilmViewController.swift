@@ -11,8 +11,7 @@ import Kingfisher
 
 final class MyFilmViewController: BaseViewController {
     private let mainView = MyFilmView()
-    private var films: Results<MyFilm>?
-    private let realm = try! Realm()
+    private let viewModel = MyFilmViewModel()
     
     override func loadView() {
         view = mainView
@@ -27,7 +26,7 @@ final class MyFilmViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFilms() 
+        loadFilms()
     }
     
     private func configureNavigationBar() {
@@ -35,7 +34,7 @@ final class MyFilmViewController: BaseViewController {
     }
     
     private func loadFilms() {
-        films = realm.objects(MyFilm.self)
+        viewModel.loadFilms()
         mainView.tableView.reloadData()
     }
     
@@ -43,29 +42,17 @@ final class MyFilmViewController: BaseViewController {
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
     }
-    
-    private func deleteFilm(at indexPath: IndexPath) {
-        guard let film = films?[indexPath.row] else { return }
-        do {
-            try realm.write {
-                realm.delete(film)
-            }
-            mainView.tableView.deleteRows(at: [indexPath], with: .fade)
-        } catch {
-            print("Error deleting film: \(error)")
-        }
-    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return films?.count ?? 0
+        return viewModel.numberOfFilms
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FilmCell", for: indexPath) as? MyFilmTableViewCell,
-              let film = films?[indexPath.row] else {
+              let film = viewModel.getFilm(at: indexPath.row) else {
             return UITableViewCell()
         }
         
@@ -80,30 +67,18 @@ extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let film = films?[indexPath.row] else { return }
+        guard let film = viewModel.getFilm(at: indexPath.row) else { return }
         
         let detailVC = MediaDetailViewController()
-       
-        let content = Content(id: film.id,
-                              backdropPath: nil,
-                              title: film.title,
-                              name: film.title,
-                              overview: film.overview,
-                              posterPath: nil,
-                              genreIds: nil,
-                              popularity: nil,
-                              video: film.video,
-                              releaseDate: nil,
-                              voteAverage: Double(film.voteAverage),
-                              voteCount: nil,
-                              mediaType: film.mediaType)
+        let content = viewModel.createContent(from: film)
         detailVC.data = content
         present(detailVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] (_, _, completionHandler) in
-            self?.deleteFilm(at: indexPath)
+            self?.viewModel.deleteFilm(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
             completionHandler(true)
         }
         deleteAction.image = UIImage(systemName: "trash")
