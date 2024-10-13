@@ -8,14 +8,6 @@
 import UIKit
 
 final class MyFilmView: BaseView {
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "내가 찜한 리스트"
-        label.textColor = Colors.primaryColor
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        return label
-    }()
-    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
@@ -25,23 +17,16 @@ final class MyFilmView: BaseView {
     }()
     
     override func configureHierarchy() {
-        addSubview(titleLabel)
         addSubview(tableView)
     }
     
     override func configureLayout() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(16)
-            make.leading.equalToSuperview().offset(16)
-        }
-        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.leading.trailing.bottom.equalTo(safeAreaLayoutGuide)
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
     
     override func configureView() {
-        backgroundColor = .black
+        backgroundColor = .white
     }
 }

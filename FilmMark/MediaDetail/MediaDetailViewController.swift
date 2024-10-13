@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RealmSwift
 import Kingfisher
 
 class MediaDetailViewController: BaseViewController {
@@ -32,14 +33,14 @@ class MediaDetailViewController: BaseViewController {
         
         let input = MediaDetailViewModel.Input(
             content: Observable.just(data),
-            viewDidLoad: Observable.just(()), 
+            viewDidLoad: Observable.just(()),
             addButtonTap: mediaDetailView.saveButton.rx.tap
         )
         
         let output = viewModel.transform(input: input)
         
         output.similarContent
-            .bind(to: mediaDetailView.similarContentCollectionView.rx.items(cellIdentifier: ContentsCollectionViewCell.id, cellType: ContentsCollectionViewCell.self)) { _, item, cell in
+            .bind(to: mediaDetailView.similarContentCollectionView.rx.items(cellIdentifier: ContentsCollectionViewCell.id, cellType: ContentsCollectionViewCell.self)) { (index, item, cell) in
                 if let posterPath = item.fullPosterPath, let url = URL(string: posterPath) {
                     cell.imageView.kf.setImage(with: url)
                 }

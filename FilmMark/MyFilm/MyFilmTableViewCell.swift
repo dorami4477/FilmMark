@@ -11,7 +11,6 @@ import Kingfisher
 
 class MyFilmTableViewCell: UITableViewCell {
     
-    // 포스터 이미지 뷰
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -19,7 +18,6 @@ class MyFilmTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    // 제목 레이블
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -27,19 +25,10 @@ class MyFilmTableViewCell: UITableViewCell {
         return label
     }()
     
-    // 재생 버튼
     private let playButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Icons.playCircle, for: .normal)
         button.tintColor = Colors.primaryColor
-        return button
-    }()
-    
-    // 삭제 버튼
-    private let deleteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(Icons.delete, for: .normal)
-        button.tintColor = .red
         return button
     }()
     
@@ -58,7 +47,6 @@ class MyFilmTableViewCell: UITableViewCell {
         contentView.addSubview(posterImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(playButton)
-        contentView.addSubview(deleteButton)
         
         posterImageView.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview().inset(8)
@@ -71,26 +59,17 @@ class MyFilmTableViewCell: UITableViewCell {
         }
         
         playButton.snp.makeConstraints { make in
-            make.trailing.equalTo(deleteButton.snp.leading).offset(-16)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(44)
-        }
-        
-        deleteButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(44)
         }
     }
     
-    // 셀 구성
     func configure(with film: MyFilm) {
         titleLabel.text = film.title
         
-        // 포스터 URL 생성 (Picsum 사용)
-        let posterUrl = "https://picsum.photos/200/300?random=\(film.id)"
-        if let url = URL(string: posterUrl) {
-            posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "film"))
+        if let posterImage = DocumentManager.shared.loadImage(imageName: "\(film.id)_poster") {
+            posterImageView.image = posterImage
         } else {
             posterImageView.image = UIImage(systemName: "film")
         }

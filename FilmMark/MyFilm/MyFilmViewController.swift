@@ -20,41 +20,41 @@ final class MyFilmViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDummyData()
         setupTableView()
         loadFilms()
+        configureNavigationBar()
     }
     
-    // 더미 데이터 설정
-    private func setupDummyData() {
-        // Realm에 데이터가 없을 경우에만 더미 데이터 추가
-        if realm.objects(MyFilm.self).isEmpty {
-            try! realm.write {
-                for i in 1...20 {
-                    let film = MyFilm(
-                        id: i,
-                        title: "영화 \(i)",
-                        video: Bool.random(),
-                        mediaType: ["movie", "tv"].randomElement()!,
-                        overview: "이것은 영화 \(i)의 줄거리입니다.",
-                        voteAverage: String(format: "%.1f", Double.random(in: 0...10))
-                    )
-                    realm.add(film)
-                }
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadFilms() 
     }
     
-    // Realm에서 영화 데이터 로드
+    private func configureNavigationBar() {
+        navigationItem.title = "내가 찜한 리스트"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func loadFilms() {
         films = realm.objects(MyFilm.self)
         mainView.tableView.reloadData()
     }
     
-    // 테이블 뷰 설정
     private func setupTableView() {
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
+    }
+    
+    private func deleteFilm(at indexPath: IndexPath) {
+        guard let film = films?[indexPath.row] else { return }
+        do {
+            try realm.write {
+                realm.delete(film)
+            }
+            mainView.tableView.deleteRows(at: [indexPath], with: .fade)
+        } catch {
+            print("Error deleting film: \(error)")
+        }
     }
 }
 
@@ -79,11 +79,36 @@ extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         tableView.deselectRow(at: indexPath, animated: true)
-         
-        guard (films?[indexPath.row]) != nil else { return }
-         
-         let detailVC = MediaDetailViewController()
-         navigationController?.pushViewController(detailVC, animated: true)
-     }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let film = films?[indexPath.row] else { return }
+        
+        let detailVC = MediaDetailViewController()
+        let content = Content(id: film.id,
+                              backdropPath: nil,
+                              title: film.title,
+                              name: film.title,
+                              overview: film.overview,
+                              posterPath: nil,
+                              genreIds: nil,
+                              popularity: nil,
+                              video: film.video,
+                              releaseDate: nil,
+                              voteAverage: Double(film.voteAverage),
+                              voteCount: nil,
+                              mediaType: film.mediaType)
+        detailVC.data = content
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] (_, _, completionHandler) in
+            self?.deleteFilm(at: indexPath)
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
 }
