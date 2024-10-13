@@ -10,28 +10,28 @@ import SnapKit
 
 final class SearchView: BaseView {
     let searchController = UISearchController(searchResultsController: nil)
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: .contentsGridLayout())
-    let tableView = UITableView()
+    let searchCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .contentsGridLayout())
+    let trendingCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .verticalContentsLayout())
     
     override func configureHierarchy() {
-        addSubview(collectionView)
-        addSubview(tableView)
+        addSubview(searchCollectionView)
+        addSubview(trendingCollectionView)
     }
     
     override func configureLayout() {
-        collectionView.snp.makeConstraints { make in
+        searchCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeAreaLayoutGuide)
         }
         
-        tableView.snp.makeConstraints { make in
+        trendingCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
     
     override func configureView() {
         configureSearchController()
-        configureCollectionView()
-        configureTableView()
+        configureTrendingCollectionView()
+        configureSearchCollectionView()
     }
     
     private func configureSearchController() {
@@ -40,18 +40,15 @@ final class SearchView: BaseView {
         searchController.hidesNavigationBarDuringPresentation = false
     }
     
-    private func configureCollectionView() {
-        collectionView.keyboardDismissMode = .onDrag
-        collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
-        collectionView.register(SearchCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchCollectionHeaderView.identifier)
+    private func configureSearchCollectionView() {
+        searchCollectionView.keyboardDismissMode = .onDrag
+        searchCollectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.id)
+        searchCollectionView.register(SearchCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchCollectionHeaderView.identifier)
     }
     
-    private func configureTableView() {
-        tableView.keyboardDismissMode = .onDrag
-        tableView.separatorStyle = .none
-        tableView.rowHeight = 160
-        tableView.sectionHeaderHeight = 40
-        tableView.sectionHeaderTopPadding = 0
-        tableView.register(SearchTableHeaderView.self, forHeaderFooterViewReuseIdentifier: SearchTableHeaderView.identifier)
+    private func configureTrendingCollectionView() {
+        trendingCollectionView.keyboardDismissMode = .onDrag
+        trendingCollectionView.register(TrendingCollectionViewCell.self, forCellWithReuseIdentifier: TrendingCollectionViewCell.identifier)
+        trendingCollectionView.register(SearchCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SearchCollectionHeaderView.identifier)
     }
 }

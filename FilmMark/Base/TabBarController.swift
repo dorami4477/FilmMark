@@ -18,7 +18,7 @@ final class TabBarController: UITabBarController {
         let home = UINavigationController(rootViewController: HomeViewController(viewModel: HomeViewModel()))
         home.tabBarItem = UITabBarItem(title: "Home", image: Icons.home, tag: 0)
         
-        let search = UINavigationController(rootViewController: SearchViewController())
+        let search = UINavigationController(rootViewController: SearchViewController(vm: SearchViewModel()))
         search.tabBarItem = UITabBarItem(title: "Top Search", image: Icons.search, tag: 1)
         
         let download = UINavigationController(rootViewController: MyFilmViewController())
