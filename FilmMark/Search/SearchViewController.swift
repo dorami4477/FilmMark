@@ -110,8 +110,7 @@ class SearchViewController: BaseViewController {
         output.trendContentsTapped
             .asSignal()
             .emit(with: self) { owner, value in
-                let vc = MediaDetailViewController()
-                vc.data = value
+                let vc = MediaDetailViewController(content: value)
                 owner.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
@@ -120,8 +119,7 @@ class SearchViewController: BaseViewController {
         output.searchContentsTapped
             .asSignal()
             .emit(with: self) { owner, value in
-                let vc = MediaDetailViewController()
-                vc.data = value
+                let vc = MediaDetailViewController(content: value)
                 owner.present(vc, animated: true)
             }
             .disposed(by: disposeBag)

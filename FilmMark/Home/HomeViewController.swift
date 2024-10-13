@@ -55,8 +55,7 @@ final class HomeViewController: BaseViewController {
         tapGesture.rx.event
             .withLatestFrom(output.mainMedia)
             .bind(with: self) { owner, value in
-                let detailVC = MediaDetailViewController()
-                detailVC.data = value
+                let detailVC = MediaDetailViewController(content: value)
                 owner.present(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
@@ -69,16 +68,14 @@ final class HomeViewController: BaseViewController {
         
         output.movieTap
             .bind(with: self) { owner, movie in
-                let detailVC = MediaDetailViewController()
-                detailVC.data = movie
+                let detailVC = MediaDetailViewController(content: movie)
                 owner.present(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
         
         output.tvTap
             .bind(with: self) { owner, tv in
-                let detailVC = MediaDetailViewController()
-                detailVC.data = tv
+                let detailVC = MediaDetailViewController(content: tv)
                 owner.present(detailVC, animated: true)
             }
             .disposed(by: disposeBag)

@@ -8,10 +8,10 @@
 import UIKit
 
 extension UICollectionViewLayout {
-    static func contentsGridLayout() -> UICollectionViewCompositionalLayout {
+    static func contentsGridLayout(heightDimensionValue: CGFloat = 0.3) -> UICollectionViewCompositionalLayout {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(40)
+            heightDimension: .estimated(1)
         )
         let header =  NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -22,7 +22,7 @@ extension UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(heightDimensionValue))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(6)
         

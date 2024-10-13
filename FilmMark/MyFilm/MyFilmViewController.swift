@@ -69,9 +69,7 @@ extension MyFilmViewController: UITableViewDataSource, UITableViewDelegate {
         
         guard let film = viewModel.getFilm(at: indexPath.row) else { return }
         
-        let detailVC = MediaDetailViewController()
-        let content = viewModel.createContent(from: film)
-        detailVC.data = content
+        let detailVC = MediaDetailViewController(myFilm: film)
         present(detailVC, animated: true, completion: nil)
     }
     

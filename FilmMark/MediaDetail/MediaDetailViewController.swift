@@ -8,12 +8,19 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import RealmSwift
-import Kingfisher
+import RxDataSources
 
 class MediaDetailViewController: BaseViewController {
+    private var similarCollectionViewDataSource: RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>!
     private let disposeBag = DisposeBag()
-    var data: Content?
+    private var myFilm: MyFilm?
+    private var content: Content?
+    
+    init(myFilm: MyFilm? = nil, content: Content? = nil) {
+        super.init(nibName: nil, bundle: nil)
+        self.myFilm = myFilm
+        self.content = content
+    }
     
     private let mediaDetailView = MediaDetailView()
     private let viewModel = MediaDetailViewModel()
@@ -24,63 +31,72 @@ class MediaDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSimilarDataSource()
         bindViewModel()
-        configureContent()
     }
     
     private func bindViewModel() {
-        guard let data = data else { return }
-        
         let input = MediaDetailViewModel.Input(
-            content: Observable.just(data),
-            viewDidLoad: Observable.just(()),
-            addButtonTap: mediaDetailView.saveButton.rx.tap
+            content: Observable.just(content),
+            myFilm: Observable.just(myFilm),
+            viewDidLoad: Observable.just(())
         )
-        
+     
         let output = viewModel.transform(input: input)
         
         output.similarContent
-            .bind(to: mediaDetailView.similarContentCollectionView.rx.items(cellIdentifier: ContentsCollectionViewCell.id, cellType: ContentsCollectionViewCell.self)) { (index, item, cell) in
-                if let posterPath = item.fullPosterPath, let url = URL(string: posterPath) {
-                    cell.imageView.kf.setImage(with: url)
-                }
-            }
+            .bind(to: mediaDetailView.similarContentCollectionView.rx.items(dataSource: similarCollectionViewDataSource))
             .disposed(by: disposeBag)
-        
-        mediaDetailView.playButton.rx.tap
-            .bind {
-                print("재생 버튼이 탭되었습니다.")
-            }
-            .disposed(by: disposeBag)
-        
+    
         mediaDetailView.closeButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
-        
-        output.showAlert
-            .bind(with: self) { owner, value in
-                let newMedia = MyFilm(id: value.id, title: value.displayTitle, video: value.video, mediaType: value.mediaType, overview: value.overview, voteAverage: value.formattedVoteAverage)
-                
-                guard let backURL = value.fullBackdropPath, let posterURL = value.fullPosterPath else { return }
-                owner.stringToUIImage([backURL, posterURL]) { value in
-                    guard let back = value[0], let poster = value[1] else { return }
-                    owner.presentLikeAlert(newMedia, backdropImage: back, posterImage: poster)
-                }
-            }
-            .disposed(by: disposeBag)
     }
     
-    private func configureContent() {
-        guard let data = data else { return }
-        
+    override func configureView() {
+        if let data = content {
+            configureContent(data)
+        } else {
+            configureMyFilm()
+        }
+    }
+    
+    private func configureContent(_ data: Content) {
         if let posterPath = data.fullBackdropPath, let url = URL(string: posterPath) {
             mediaDetailView.posterImageView.kf.setImage(with: url)
         }
-        
-        mediaDetailView.titleLabel.text = data.displayTitle
-        mediaDetailView.descriptionLabel.text = data.overview
-        mediaDetailView.ratingLabel.text = data.formattedVoteAverage
+    }
+    
+    private func configureMyFilm() {
+        guard let myFilm else { return }
+        guard let backdropImage = DocumentManager.shared.loadImage(imageName: "\(myFilm.id)_backdrop") else { return }
+        mediaDetailView.posterImageView.image = backdropImage
+    }
+    
+    private func configureSimilarDataSource() {
+        similarCollectionViewDataSource = RxCollectionViewSectionedReloadDataSource<SectionOfData<Content>>(configureCell: { (dataSource, collectionView, indexPath, item) in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.id, for: indexPath) as? ContentsCollectionViewCell else { return UICollectionViewCell() }
+            cell.configureCell(item)
+            return cell
+        }, configureSupplementaryView: { [weak self] dataSource, collectionView, kind, indexPath in
+            guard let self else { return UICollectionReusableView() }
+            
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MediaDetailHeaderView.identifier, for: indexPath) as? MediaDetailHeaderView else { return UICollectionReusableView() }
+            
+            if let content {
+                header.configureView(with: content)
+            } else {
+                guard let myFilm else { return header }
+                header.configureView(with: myFilm)
+            }
+            
+            return header
+        })
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

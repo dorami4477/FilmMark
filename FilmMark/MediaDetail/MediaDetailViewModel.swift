@@ -13,21 +13,22 @@ class MediaDetailViewModel {
     private let disposeBag = DisposeBag()
     
     struct Input {
-        let content: Observable<Content>
+        let content: Observable<Content?>
+        let myFilm: Observable<MyFilm?>
         let viewDidLoad: Observable<Void>
-        let addButtonTap: ControlEvent<Void>
     }
     
     struct Output {
-        let similarContent: Observable<[Content]>
+        let similarContent: BehaviorRelay<[SectionOfData<Content>]>
         let showAlert: Observable<Content>
     }
     
     func transform(input: Input) -> Output {
-        let similarContent = PublishSubject<[Content]>()
+        let similarContent = BehaviorRelay<[SectionOfData<Content>]>(value: [])
         let showAlert = PublishSubject<Content>()
         
         input.content
+            .compactMap { $0 }
             .flatMap { content -> Observable<Result<ContentsBox, NetworkService.NetworkErrorCase>> in
                 let mediaType = content.mediaType ?? "movie"
                 let endpoint: TMDBRouter = mediaType == "movie" ? .similarMovie(id: content.id) : .similarTV(id: content.id)
@@ -36,21 +37,22 @@ class MediaDetailViewModel {
             .subscribe(onNext: { result in
                 switch result {
                 case .success(let contentsBox):
-                    similarContent.onNext(contentsBox.results)
+                    let results = SectionOfData(header: "상세뷰", items: contentsBox.results)
+                    similarContent.accept([results])
                 case .failure(let error):
                     print("Error fetching similar content: \(error)")
-                    similarContent.onNext([])
                 }
             })
             .disposed(by: disposeBag)
-        
-        input.addButtonTap
-            .withLatestFrom(input.content)
-            .subscribe(with: self, onNext: { owner, value in
-                showAlert.onNext(value)
-            })
+
+        input.myFilm
+            .compactMap { $0 }
+            .subscribe(with: self) { owner, value in
+                let results = SectionOfData(header: "상세뷰", items: [Content(id: -1, backdropPath: nil, title: nil, name: nil, overview: nil, posterPath: nil, genreIds: nil, popularity: nil, video: nil, releaseDate: nil, voteAverage: nil, voteCount: nil, mediaType: nil)])
+                similarContent.accept([results])
+            }
             .disposed(by: disposeBag)
         
-        return Output(similarContent: similarContent.asObservable(), showAlert: showAlert)
+        return Output(similarContent: similarContent, showAlert: showAlert)
     }
 }
