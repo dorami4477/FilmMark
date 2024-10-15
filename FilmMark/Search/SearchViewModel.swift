@@ -67,7 +67,7 @@ final class SearchViewModel: BaseViewModel {
         
         // MARK: 검색 (30개씩 가져오기)
         keyword
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(isEmptyKeyword)
             .filter { !$0 }
             .withLatestFrom(keyword)
