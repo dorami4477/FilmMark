@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 class MyFilmViewModel {
+    private let fileManager = DocumentManager.shared
     private let realm = try! Realm()
     private(set) var films: Results<MyFilm>?
     
@@ -26,6 +27,8 @@ class MyFilmViewModel {
     
     func deleteFilm(at index: Int) {
         guard let film = films?[index] else { return }
+        fileManager.removeImage(imageName: "\(film.id)_poster")
+        fileManager.removeImage(imageName: "\(film.id)_backdrop")
         do {
             try realm.write {
                 realm.delete(film)
