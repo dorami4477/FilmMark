@@ -48,11 +48,16 @@ class MediaDetailViewModel {
         input.myFilm
             .compactMap { $0 }
             .subscribe(with: self) { owner, value in
+                print(value)
                 let results = SectionOfData(header: "상세뷰", items: [Content(id: -1, backdropPath: nil, title: nil, name: nil, overview: nil, posterPath: nil, genreIds: nil, popularity: nil, video: nil, releaseDate: nil, voteAverage: nil, voteCount: nil, mediaType: nil)])
                 similarContent.accept([results])
             }
             .disposed(by: disposeBag)
         
         return Output(similarContent: similarContent, showAlert: showAlert)
+    }
+    
+    func contentToFilm(_ content: Content) -> MyFilm {
+        return MyFilm(id: content.id, title: content.displayTitle, video: content.video, mediaType: content.mediaType, overview: content.overview, voteAverage: content.formattedVoteAverage)
     }
 }

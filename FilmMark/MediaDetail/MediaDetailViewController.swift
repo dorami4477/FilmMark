@@ -31,6 +31,7 @@ class MediaDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(MyFilmRepository.shared.readURL())
         configureSimilarDataSource()
         bindViewModel()
     }
@@ -78,49 +79,40 @@ class MediaDetailViewController: BaseViewController {
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MediaDetailHeaderView.identifier, for: indexPath) as? MediaDetailHeaderView else { return UICollectionReusableView() }
             
             // 저장할 데이터
-            var savedata: (MyFilm, UIImage, UIImage)
+            var savedata: MyFilm
+            var backdropImage = UIImage()
+            var posterImage = UIImage()
+            
             if let content { // content가 있다면
                 header.configureView(with: content)
-                savedata = configureData(content)
+                savedata = viewModel.contentToFilm(content)
+                if let backURL = content.fullBackdropPath, let posterURL = content.fullPosterPath {
+                    stringToUIImage([backURL, posterURL]) { value in
+                        guard let back = value[0], let poster = value[1] else { return }
+                        backdropImage = back
+                        posterImage = poster
+                    }
+                }
             } else { // content가 없고 myFilm이 있다면
                 guard let myFilm else { return header }
                 header.configureView(with: myFilm)
-                savedata = configureData(myFilm)
+                savedata = myFilm
+                if let poster = DocumentManager.shared.loadImage(imageName: "\(myFilm.id)_poster"),
+                   let back = DocumentManager.shared.loadImage(imageName: "\(myFilm.id)_backdrop") {
+                    backdropImage = back
+                    posterImage = poster
+                }
             }
             
-            // 저장 버튼 -> Alert 
+            // 저장 버튼 -> Alert
             header.saveButton.rx.tap
                 .bind(with: self) { owner, value in
-                    owner.presentLikeAlert(savedata.0, backdropImage: savedata.1, posterImage: savedata.2)
+                    owner.presentLikeAlert(savedata, backdropImage: backdropImage, posterImage: posterImage)
                 }
                 .disposed(by: disposeBag)
             
             return header
         })
-    }
-    
-    // MARK: Content -> Savedata
-    private func configureData(_ content: Content) -> (MyFilm, UIImage, UIImage) {
-        var backdropImage = UIImage()
-        var posterImage = UIImage()
-        let myFilmToSave = MyFilm(id: content.id, title: content.displayTitle, video: content.video, mediaType: content.mediaType, overview: content.overview, voteAverage: content.formattedVoteAverage)
-        
-        if let backURL = content.fullBackdropPath, let posterURL = content.fullPosterPath {
-            stringToUIImage([backURL, posterURL]) { value in
-                guard let back = value[0], let poster = value[1] else { return }
-                (backdropImage, posterImage) = (back, poster)
-            }
-        }
-        
-        return (myFilmToSave, backdropImage, posterImage)
-    }
-    
-    // MARK: MyFilm -> Savedata
-    private func configureData(_ myFilm: MyFilm) -> (MyFilm, UIImage, UIImage) {
-        let myFilmToSave = myFilm
-        let posterImage = DocumentManager.shared.loadImage(imageName: "\(myFilm.id)_poster") ?? UIImage()
-        let backdropImage = DocumentManager.shared.loadImage(imageName: "\(myFilm.id)_backdrop") ?? UIImage()
-        return (myFilmToSave, posterImage, backdropImage)
     }
     
     @MainActor required init?(coder: NSCoder) {
