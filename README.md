@@ -1,6 +1,11 @@
 # FilmMark
 > TMDB API를 사용하여 사용자가 좋아하는 영화・드라마를 즐겨찾기 하고 예고편을 쉽게 찾아볼 수 있는 앱입니다.
 
+<img src="https://github.com/user-attachments/assets/daa91833-86c1-4962-b987-83b2ff69e75c" width="200"/>
+<img src="https://github.com/user-attachments/assets/3bae277a-1253-4dda-a040-c8c7155961cd" width="200"/>
+<img src="https://github.com/user-attachments/assets/7d7d0a03-e945-413f-805d-922f7744cecd" width="200"/>
+<img src="https://github.com/user-attachments/assets/a8d4bedd-1dfe-4350-8d70-2987e80a5aa3" width="200"/>
+
 ## 개발 환경
 
 - 개발 기간: 2024. 10. 9 ~ 10.14
