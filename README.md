@@ -36,6 +36,25 @@
     - 검색 속도의 향상과 메모리의 효율성을 위해 Realm 모델의 인덱스 활용
 - MVVM + RxSwift
     - 관심사의 분리로 코드 가독성 및 유지보수성 향상
+ 
+## 협업 작업 규칙
+
+- 작업 분배
+    - 작업 효율을 높이기 위한 공통 항목들의 선별 및 컴포넌트화
+    - 각각의 핵심 기능을 기준으로 하여 역할 분배
+    - 핵심 기능: Home(Trending), Search, Myfilm
+- 작업 커뮤니케이션
+    - Conflict 방지 및 작업의 효율성을 위해 차트를 통해 진행상황 공유
+    - Pull Request 및 기타 요청에 반드시 응답 남기기
+- 코드 컨벤션
+    - Swift Style Guide - Google
+- 커밋 커벤션
+    - Karma Git Commit Message Style
+- 브랜치 전략
+    - Github-Flow 전략을 기반으로 하여 변경 사항을 빠르게 반영할 수 있도록 함
+    - 메인브랜치 main과 보조브랜치 feature를 사용
+    - feature 브랜치 내에서 /(슬래쉬)를 통해 각자 맡은 파트와 개발 기능을 명시함
+        - ex) feature/trending/interface
       
 ## 폴더 트리
   ```
@@ -82,27 +101,6 @@
 ├── SceneDelegate
 └── ViewController
   ```
-
-# 브랜치 전략
-
-### 협업 작업 규칙
-
-- 작업 분배
-    - 작업 효율을 높이기 위한 공통 항목들의 선별 및 컴포넌트화
-    - 각각의 핵심 기능을 기준으로 하여 역할 분배
-    - 핵심 기능: Home(Trending), Search, Myfilm
-- 작업 커뮤니케이션
-    - Conflict 방지 및 작업의 효율성을 위해 차트를 통해 진행상황 공유
-    - Pull Request 및 기타 요청에 반드시 응답 남기기
-- 코드 컨벤션
-    - Swift Style Guide - Google
-- 커밋 커벤션
-    - Karma Git Commit Message Style
-- 브랜치 전략
-    - Github-Flow 전략을 기반으로 하여 변경 사항을 빠르게 반영할 수 있도록 함
-    - 메인브랜치 main과 보조브랜치 feature를 사용
-    - feature 브랜치 내에서 /(슬래쉬)를 통해 각자 맡은 파트와 개발 기능을 명시함
-        - ex) feature/trending/interface
      
 ## 연락처
 
