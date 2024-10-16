@@ -84,19 +84,19 @@
 │   └── HomeViewModel
 ├── Search
 │   ├── SearchViewController
-│   ├── SearchColl...eaderView
+│   ├── SearchCollectionHeaderView
 │   ├── SearchView
 │   └── SearchViewModel
-│       └── TrendingC...ionViewCell
+│       └── TrendingCollectionViewCell
 ├── MyFilm
 │   ├── MyFilmViewController
 │   ├── MyFilmView
 │   ├── MyFilmTableViewCell
 │   └── MyFilmViewModel
 ├── MediaDetail
-│   ├── MediaDet...Controller
+│   ├── MediaDetailViewController
 │   ├── MediaDetailView
-│   ├── MediaDet...iewModel
+│   ├── MediaDetailViewModel
 │   └── MediaDetailHeaderView
 ├── Base
 │   ├── BaseViewController 
